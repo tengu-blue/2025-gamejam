@@ -1,16 +1,32 @@
 extends CharacterBody2D
 
+var initCol : Color 
+
 func _ready() -> void:
 	position = $"../Spawn".position
+	initCol = $Sprite2D.modulate
 
 func death_anim() -> void:
-	# TODO:
-	position = $"../Spawn".position
+	
+	var t = create_tween()
+	t.tween_property($Sprite2D, "modulate", Color.DARK_RED, 0.1)
+	t.tween_property($Sprite2D, "scale", Vector2(0, 0), 0.1)
+	t.set_parallel()
+	
 	velocity.x = 0
 	velocity.y = 0
 	jumping = false
 	on_wall = false
 	jumpCounter = 0
+	
+	await t.finished
+	
+	position = $"../Spawn".position
+		
+	$Sprite2D.modulate = initCol
+	$Sprite2D.scale = Vector2(1, 1)
+	
+	GameManager.respawned()
 
 
 @export var gravityScale : float = 1
@@ -88,6 +104,7 @@ func _process(delta: float) -> void:
 	
 	if GameManager.can_move() and Input.is_action_just_pressed("Jump") and (is_on_floor() or on_wall or Time.get_ticks_msec() - last_ground < coyote_time*1000) and !jumping:
 		jumping = true
+		$SFXPlayer.play()
 		last_ground -= 1000
 	
 	if jumping:

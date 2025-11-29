@@ -84,43 +84,52 @@ var lineIndex := 0
 
 var dialogs := [
 	[
+		[0, ""],
 		[1, "Hey, it’s so nice to see you again."],
 		[2, "Hi! You too!"],
 		[1, "It’s been a while. How are you?"],
 		[2, "I’m... fine..."],
 		[0, ""],
-		[2, "I’m working on a videogame now. Hoping it’ll be very popular."],
+		[2, "I’m working on a new videogame."],
 		[1, "Oh. That’s awesome! Show me?"],
 		[2, "Sure."]
 	],
 	[
 		[2, "It’s work in progress, so the graphics aren’t finished yet."],
-		[1, "Looks good, I think! So how do you play?"],
-		[2, "Well it’s a platformer game. You move and jump around and your goal is to reach the end there."]
+		[1, "I think it looks great! So how do you play?"],
+		[2, "Well it’s a platformer game. You move and jump around, and your goal is to reach the end up there to the right."],
+		[2, "I just added wall jumping at these purple tiles."]
 	],
 	[
 		[1, "Oh. That looks fun!"],
-		[2, "Eh... Replaying it now, I think it’s way too easy."],
-		[2, "Oh! I know I’m gonna add some..."]
+		[2, "Eh... Replaying it now, I think it’s a bit boring."],
+		[2, "I think I have to make it more difficult."],
+		[2, "You have to be bold to make it as a game developer..."],
+		[0, ""],
+		[2, "Oh, I know! I’ll add some..."]
 	],
 	[
-		[2, "And maybe some..."]
+		[2, "And also some..."]
 	],
 	[
+		[1, "Wait, why are you making it more difficult?" ],
+		[2, "So that it's right. It will make it all better." ],
+		[0, ""],
 		[1, "Well, I suck at hard games personally..." ],
 		[2, "Oh, but people really like them. You know, the challenge is what makes it fun." ], 
 		[2, "Overcoming it. It’s like real life!" ],
 		[1, "..." ],
 		[1, "right." ],
-		[1, "Hey, how nice, it’s snowing outside. Do you wanna go out?" ],
-		[2, "Nah. I feel like I’m really close now..." ]
+		[0, ""],
+		[1, "Hey, how nice, it’s snowing outside. Wanna go out?" ],
+		[2, "I feel like I’m really close now..." ]
 	],
 	[
 		[1, "Hey the controls look a bit stiff?"],
-		[2, "Yea, it makes it harder. But maybe I could make them a little worse?"],
-		[1, "Okey... You sure?"],
+		[2, "Yea, it makes it harder to play. But maybe I could make them a little worse?"],
+		[1, "Okay... You sure?"],
 		[2, "If it’s a little harder, it will be okay. Everything will be okay."],
-		[1, "huh?"]
+		[1, "...huh?"]
 	],
 	[
 		[2, "And maybe some..."]
@@ -135,7 +144,7 @@ var dialogs := [
 		[1, "..." ]
 	],
 	[
-		[1, "Great job! I think that’s really impressive... Hey..."]
+		[1, "Great job! That’s very impressive... Hey..."]
 	],
 	[
 		[ 1, "Are you okay?"],
@@ -148,9 +157,11 @@ var dialogs := [
 		[ 2, "That... It would help... that I would be..."],
 		[ 2, "happy... but..."],
 		[ 1, "I think it’s brave to admit that. Better than acting bold, and pretending everything's fine..."],
-		[ 1, "We all need some help sometimes. How about we take a break now and go enjoy the snow?"],
+		[ 1, "We all need help sometimes. How about we take a break now and go enjoy the snow?"],
 		[ 2, "..."],
-		[ 2, "Yeah. Yeah I think that would be nice."],
+		[ 2, "Yeah."],
+		[ 2, "Yeah I think that would be nice."],
+		[ 2, ""],
 		[ 2, "Thank you."],
 	],
 	
@@ -455,3 +466,15 @@ func applyState() -> void:
 				get_tree().change_scene_to_file("res://scenes/EndScene.tscn")
 			)
 	pass
+
+
+func respawned():
+	
+	if $GiveUp.visible:
+		var t = create_tween()
+		t.tween_property($GiveUp, "modulate", Color.DARK_RED, 0.3)
+		
+		await t.finished
+		
+		create_tween().tween_property($GiveUp, "modulate", Color.WHITE, 0.1)
+	

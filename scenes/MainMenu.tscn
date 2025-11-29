@@ -1,32 +1,156 @@
-[gd_scene load_steps=2 format=3 uid="uid://clcc8o5lbpkku"]
+[gd_scene load_steps=10 format=3 uid="uid://clcc8o5lbpkku"]
 
+[ext_resource type="FontVariation" uid="uid://daqtgud8msa3a" path="res://scenes/button_text.tres" id="1_l72w3"]
 [ext_resource type="Script" uid="uid://bec5jlli2aega" path="res://scripts/main_button_pressed.gd" id="1_yqorp"]
+[ext_resource type="StyleBox" uid="uid://1ty8cgv34s5q" path="res://scenes/button_style.tres" id="2_826wr"]
+[ext_resource type="StyleBox" uid="uid://cjnxfj2kx2yer" path="res://scenes/butotn_press.tres" id="3_ucygd"]
+[ext_resource type="StyleBox" uid="uid://dntvvp0gly24y" path="res://scenes/button_hover.tres" id="4_mipys"]
+[ext_resource type="Texture2D" uid="uid://cl838aak1kt0l" path="res://assets/background_menu.png" id="6_826wr"]
+[ext_resource type="Texture2D" uid="uid://b12xwrv7ufue4" path="res://assets/gdb-keyboard-2.png" id="7_8a8k8"]
+[ext_resource type="Texture2D" uid="uid://b2bijinr3m3sn" path="res://assets/gdb-xbox-2.png" id="8_7la6k"]
+[ext_resource type="Texture2D" uid="uid://b5u6ydk8v3kny" path="res://assets/craftpix-net-111332-free-factory-pixel-art-32x32-tileset-for-cyberpunk/1 Tiles/BackTileset.png" id="9_2nypq"]
 
 [node name="MainMenu" type="CanvasLayer"]
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(540.00006, 540.00006)
+scale = Vector2(1.082, 1.082)
+texture = ExtResource("6_826wr")
+
 [node name="Button" type="Button" parent="."]
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -338.0
-offset_top = 250.0
-offset_right = 342.0
-offset_bottom = 416.0
+anchor_bottom = 1.0
+offset_left = -340.0
+offset_top = -369.0
+offset_right = 340.0
+offset_bottom = -203.0
 grow_horizontal = 2
-grow_vertical = 2
-text = "Play"
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_l72w3")
+theme_override_font_sizes/font_size = 33
+theme_override_styles/normal = ExtResource("2_826wr")
+theme_override_styles/pressed = ExtResource("3_ucygd")
+theme_override_styles/hover = ExtResource("4_mipys")
+text = "Tell me a story."
 script = ExtResource("1_yqorp")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 234.0
-offset_top = 330.0
-offset_right = 935.0
-offset_bottom = 625.0
+offset_left = 600.0
+offset_top = 286.0
+offset_right = 698.0
+offset_bottom = 317.0
 focus_behavior_recursive = 1
-text = "WSAD / DPAD / JoyStick to move
-Space / Bottom controller button to jump
-Blue walls for wall jumps"
+theme_override_font_sizes/font_size = 19
+text = "To Move"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 386.8902
+offset_top = 490.0
+offset_right = 484.8902
+offset_bottom = 521.0
+focus_behavior_recursive = 1
+theme_override_font_sizes/font_size = 19
+text = "To Jump"
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 582.0
+offset_top = 491.0
+offset_right = 714.0
+offset_bottom = 522.0
+focus_behavior_recursive = 1
+theme_override_font_sizes/font_size = 19
+text = "To Wall Jump"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 380.0
+offset_top = 285.0
+offset_right = 487.0
+offset_bottom = 316.0
+focus_behavior_recursive = 1
+theme_override_font_sizes/font_size = 19
+text = "Next Dialog"
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(612.22266, 345.83374)
+scale = Vector2(2.777835, 2.777835)
+texture = ExtResource("7_8a8k8")
+region_enabled = true
+region_rect = Rect2(64, 177, 16, 15)
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(667.2227, 345.83374)
+scale = Vector2(2.777835, 2.777835)
+texture = ExtResource("7_8a8k8")
+region_enabled = true
+region_rect = Rect2(96, 177, 16, 15)
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(433, 552)
+scale = Vector2(2.777835, 2.777835)
+texture = ExtResource("7_8a8k8")
+region_enabled = true
+region_rect = Rect2(100, 322, 46, 14)
+
+[node name="Sprite2D9" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(429, 344)
+scale = Vector2(2.777835, 2.777835)
+texture = ExtResource("7_8a8k8")
+region_enabled = true
+region_rect = Rect2(100, 322, 46, 14)
+
+[node name="Sprite2D10" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(473.99997, 413.00003)
+scale = Vector2(2.8611212, 2.8611217)
+texture = ExtResource("7_8a8k8")
+region_enabled = true
+region_rect = Rect2(503, 34, 18, 28)
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(668.2227, 411.33398)
+scale = Vector2(2.777835, 2.777835)
+texture = ExtResource("8_7la6k")
+region_enabled = true
+region_rect = Rect2(100, 180, 24, 24)
+
+[node name="Sprite2D7" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(609.22266, 411.3341)
+scale = Vector2(2.777835, 2.777835)
+texture = ExtResource("8_7la6k")
+region_enabled = true
+region_rect = Rect2(216, 72, 16, 16)
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(437.99994, 600)
+scale = Vector2(2.777835, 2.777835)
+texture = ExtResource("8_7la6k")
+region_enabled = true
+region_rect = Rect2(17, 193, 14, 14)
+
+[node name="Sprite2D8" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(396, 411)
+scale = Vector2(2.777835, 2.777835)
+texture = ExtResource("8_7la6k")
+region_enabled = true
+region_rect = Rect2(17, 225, 14, 14)
+
+[node name="Sprite2D11" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(641, 571)
+scale = Vector2(2.6389174, 2.6389174)
+texture = ExtResource("9_2nypq")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
 
 [connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

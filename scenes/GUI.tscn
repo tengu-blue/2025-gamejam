@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://djigge1u7r1oa"]
+[gd_scene load_steps=17 format=3 uid="uid://djigge1u7r1oa"]
 
 [ext_resource type="Script" uid="uid://yqo8jd0q8dkn" path="res://scripts/game_manager_script.gd" id="1_jbthi"]
 [ext_resource type="Script" uid="uid://cdlyddx418um7" path="res://scripts/dialog_controls.gd" id="2_womn8"]
+[ext_resource type="Texture2D" uid="uid://b2bijinr3m3sn" path="res://assets/gdb-xbox-2.png" id="3_1i4pd"]
 [ext_resource type="Texture2D" uid="uid://y5i87ftnmmu2" path="res://assets/silh1.png" id="3_tqy5q"]
 [ext_resource type="Texture2D" uid="uid://citforytqxfw5" path="res://assets/silh2.png" id="4_hywd1"]
 [ext_resource type="Script" uid="uid://5l4antw0wqhe" path="res://scripts/beat_level.gd" id="4_shsct"]
@@ -9,11 +10,21 @@
 [ext_resource type="StyleBox" uid="uid://1ty8cgv34s5q" path="res://scenes/button_style.tres" id="5_hywd1"]
 [ext_resource type="StyleBox" uid="uid://cjnxfj2kx2yer" path="res://scenes/butotn_press.tres" id="7_cekc3"]
 [ext_resource type="StyleBox" uid="uid://dntvvp0gly24y" path="res://scenes/button_hover.tres" id="8_1i4pd"]
+[ext_resource type="AudioStream" uid="uid://yg37udiybqf4" path="res://assets/audio/01 Hawkin - Week 1 - rain.wav" id="11_y0luo"]
 
 [sub_resource type="SystemFont" id="SystemFont_tqy5q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_womn8"]
-size = Vector2(1041, 414)
+size = Vector2(1068, 486)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cekc3"]
+bg_color = Color(0.47318488, 0.66252214, 0.38964257, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1i4pd"]
+bg_color = Color(0.15465799, 0.45210087, 0.27043435, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y0luo"]
+bg_color = Color(0.287, 0.7, 0.30764997, 0.827451)
 
 [node name="Gui" type="CanvasLayer"]
 layer = 100
@@ -51,6 +62,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("2_womn8")
 
+[node name="Sprite2D" type="Sprite2D" parent="DialogBody/PressToSkip"]
+modulate = Color(0.581033, 0.58103293, 0.5810329, 1)
+texture_filter = 1
+position = Vector2(595, 34)
+scale = Vector2(2.3547177, 2.3547177)
+texture = ExtResource("3_1i4pd")
+region_enabled = true
+region_rect = Rect2(242, 226, 12, 12)
+
 [node name="Char2" type="Sprite2D" parent="DialogBody"]
 position = Vector2(146, 190)
 scale = Vector2(0.68, 0.68)
@@ -81,14 +101,14 @@ text = "Felicia"
 priority = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DialogBody/Area2D"]
-position = Vector2(510.5, 197)
+position = Vector2(509, 189)
 shape = SubResource("RectangleShape2D_womn8")
 
 [node name="Spikes" type="Button" parent="."]
-offset_left = 163.0
-offset_top = 790.0
-offset_right = 383.0
-offset_bottom = 920.0
+offset_left = 151.0
+offset_top = 767.0
+offset_right = 371.0
+offset_bottom = 897.0
 focus_neighbor_left = NodePath("../Platforms")
 focus_neighbor_right = NodePath("../Pits")
 theme_override_fonts/font = ExtResource("5_cws7i")
@@ -99,10 +119,10 @@ theme_override_styles/hover = ExtResource("8_1i4pd")
 text = "Spikes"
 
 [node name="Pits" type="Button" parent="."]
-offset_left = 435.0
-offset_top = 790.0
-offset_right = 655.0
-offset_bottom = 920.0
+offset_left = 423.0
+offset_top = 767.0
+offset_right = 643.0
+offset_bottom = 897.0
 focus_neighbor_left = NodePath("../Spikes")
 focus_neighbor_right = NodePath("../Platforms")
 theme_override_fonts/font = ExtResource("5_cws7i")
@@ -113,10 +133,10 @@ theme_override_styles/hover = ExtResource("8_1i4pd")
 text = "Pits"
 
 [node name="Pikes" type="Button" parent="."]
-offset_left = 575.0
-offset_top = 790.0
-offset_right = 795.0
-offset_bottom = 920.0
+offset_left = 563.0
+offset_top = 767.0
+offset_right = 783.0
+offset_bottom = 897.0
 focus_neighbor_left = NodePath("../Sawblade")
 focus_neighbor_right = NodePath("../Sawblade")
 theme_override_font_sizes/font_size = 22
@@ -126,10 +146,10 @@ theme_override_styles/hover = ExtResource("8_1i4pd")
 text = "Pikes"
 
 [node name="Sawblade" type="Button" parent="."]
-offset_left = 304.0
-offset_top = 790.0
-offset_right = 524.0
-offset_bottom = 920.0
+offset_left = 292.0
+offset_top = 767.0
+offset_right = 512.0
+offset_bottom = 897.0
 focus_neighbor_left = NodePath("../Pikes")
 focus_neighbor_right = NodePath("../Pikes")
 theme_override_fonts/font = ExtResource("5_cws7i")
@@ -140,10 +160,10 @@ theme_override_styles/hover = ExtResource("8_1i4pd")
 text = "Sawblade"
 
 [node name="Platforms" type="Button" parent="."]
-offset_left = 710.0
-offset_top = 790.0
-offset_right = 930.0
-offset_bottom = 920.0
+offset_left = 698.0
+offset_top = 767.0
+offset_right = 918.0
+offset_bottom = 897.0
 focus_neighbor_left = NodePath("../Pits")
 focus_neighbor_right = NodePath("../Spikes")
 theme_override_fonts/font = ExtResource("5_cws7i")
@@ -167,10 +187,15 @@ offset_left = 935.0
 offset_top = 934.0
 offset_right = 1055.0
 offset_bottom = 1054.0
-theme_override_styles/normal = ExtResource("5_hywd1")
-theme_override_styles/pressed = ExtResource("7_cekc3")
-theme_override_styles/hover = ExtResource("8_1i4pd")
+theme_override_fonts/font = ExtResource("5_cws7i")
+theme_override_styles/normal = SubResource("StyleBoxFlat_cekc3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1i4pd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y0luo")
 text = "Give Up"
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_y0luo")
+autoplay = true
 
 [connection signal="visibility_changed" from="DialogBody/PressToSkip" to="DialogBody/PressToSkip" method="_on_visibility_changed"]
 [connection signal="input_event" from="DialogBody/Area2D" to="DialogBody/PressToSkip" method="_on_area_2d_input_event"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://da36jwyg52jy4"]
+[gd_scene load_steps=17 format=4 uid="uid://da36jwyg52jy4"]
 
 [ext_resource type="TileSet" uid="uid://bmrv70o5g5e3o" path="res://assets/level_tiles.tres" id="1_6ovph"]
 [ext_resource type="Script" uid="uid://bsjkciqkxfgrl" path="res://scripts/level.gd" id="1_bwv4p"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bdp4blnqtqpda" path="res://scenes/WallJumpPoint.tscn" id="6_76388"]
 [ext_resource type="PackedScene" uid="uid://6eecpefh5tin" path="res://scenes/Goal.tscn" id="8_ecr63"]
 [ext_resource type="PackedScene" uid="uid://dit2l41vwb1o0" path="res://scenes/Pike.tscn" id="10_2meft"]
+[ext_resource type="Script" uid="uid://bsn6csxntdaq8" path="res://scripts/jitter.gd" id="14_av1gt"]
 [ext_resource type="Script" uid="uid://jthqqgp3d25u" path="res://scripts/camera.gd" id="15_ipmer"]
 
 [node name="Level1" type="Node2D"]
@@ -26,7 +27,7 @@ scale = Vector2(1.7335474, 1.7391305)
 texture = ExtResource("2_0xqs2")
 
 [node name="Spawn" type="Node2D" parent="."]
-position = Vector2(159, 981)
+position = Vector2(159, 984)
 
 [node name="PlayerController" parent="." instance=ExtResource("3_odhdn")]
 position = Vector2(283, 937.00006)
@@ -308,14 +309,24 @@ position = Vector2(120, 348)
 scale = Vector2(1, 2.3199997)
 left = true
 
+[node name="UnderLayer3" type="TileMapLayer" parent="."]
+modulate = Color(0.23854318, 0.19475752, 0.24916631, 1)
+z_index = -1
+texture_filter = 1
+scale = Vector2(1.985, 1.985)
+tile_map_data = PackedByteArray("AAAFAAUAAgACAAEAAAAJAA0AAgACAAEAAAALAAkAAgACAAEAAAAMAAkAAgACAAEAAAAMAA0AAgACAAEAAAA=")
+tile_set = ExtResource("1_6ovph")
+collision_enabled = false
+
 [node name="UnderLayer" type="TileMapLayer" parent="."]
 modulate = Color(0.23854318, 0.19475752, 0.24916631, 1)
 z_index = -1
 texture_filter = 1
 scale = Vector2(1.985, 1.985)
-tile_map_data = PackedByteArray("AAAJAA0AAgACAAEAAAAMAA0AAgACAAEAAAAMAAkAAgACAAEAAAALAAkAAgACAAEAAAAFAAUAAgACAAEAAAAFAAsAAQABAAcAAAAGAAsAAQABAAcAAAAHAAsAAQABAAcAAAAIAAsAAQABAAcAAAAJAAsAAQABAAcAAAAKAAsAAQABAAcAAAALAAsAAQACAAcAAAAEAAsAAQAGAAcAAAAEAAoAAQAHAAcAAAABAAoAAQABAAcAAAACAAoAAQABAAcAAAADAAoAAQABAAcAAAD//woAAQABAAcAAAAAAAoAAQABAAcAAAA=")
+tile_map_data = PackedByteArray("AAAEAAsAAQAGAAcAAAAEAAoAAQAHAAcAAAABAAoAAQABAAcAAAACAAoAAQABAAcAAAADAAoAAQABAAcAAAD//woAAQABAAcAAAAAAAoAAQABAAcAAAAIAAIAAQAGAAcAAAAJAAIAAQABAAcAAAAKAAIAAQABAAcAAAALAAIAAQABAAcAAAAMAAIAAQABAAcAAAANAAIAAQABAAcAAAAOAAIAAQABAAcAAAAPAAIAAQABAAcAAAAQAAIAAQABAAcAAAARAAIAAQABAAcAAAASAAIAAQABAAcAAAAFAAsAAQABAAcAAAAGAAsAAQABAAcAAAAHAAsAAQABAAcAAAAIAAsAAQABAAcAAAAJAAsAAQABAAcAAAAKAAsAAQABAAcAAAALAAsAAQACAAcAAAA=")
 tile_set = ExtResource("1_6ovph")
 collision_enabled = false
+script = ExtResource("14_av1gt")
 
 [node name="UnderLayer2" type="TileMapLayer" parent="."]
 modulate = Color(0.23854318, 0.19475752, 0.24916631, 1)
@@ -323,9 +334,10 @@ z_index = -1
 texture_filter = 1
 rotation = 1.5707964
 scale = Vector2(1.985, 1.985)
-tile_map_data = PackedByteArray("AAADAPf/AQADAAcAAAAEAPf/AQABAAcAAAAFAPf/AQABAAcAAAAGAPf/AQABAAcAAAAHAPf/AQABAAcAAAAIAPf/AQABAAcAAAAJAPf/AQABAAcAAAAKAPf/AQABAAcAAAALAPf/AQABAAcAAAAMAPf/AQABAAcAAAANAPf/AQABAAcAAAAOAPf/AQABAAcAAAAPAPf/AQABAAcAAAAQAPf/AQABAAcAAAACAPf/AQABAAcAAAABAPf/AQAGAAcAAAA=")
+tile_map_data = PackedByteArray("AAADAPf/AQADAAcAAAAEAPf/AQABAAcAAAAFAPf/AQABAAcAAAAGAPf/AQABAAcAAAAHAPf/AQABAAcAAAAIAPf/AQABAAcAAAAJAPf/AQABAAcAAAAKAPf/AQABAAcAAAALAPf/AQABAAcAAAAMAPf/AQABAAcAAAANAPf/AQABAAcAAAAOAPf/AQABAAcAAAAPAPf/AQABAAcAAAAQAPf/AQABAAcAAAACAPf/AQABAAcAAAABAPf/AQABAAcAAAAAAPf/AQABAAcAAAA=")
 tile_set = ExtResource("1_6ovph")
 collision_enabled = false
+script = ExtResource("14_av1gt")
 
 [node name="BaseLayer" type="TileMapLayer" parent="."]
 texture_filter = 1
@@ -334,9 +346,20 @@ tile_map_data = PackedByteArray("AAABAAAAAgABAAEAAAABABAAAgABAAEAAAACAAAAAgABAAE
 tile_set = ExtResource("1_6ovph")
 
 [node name="OverLayer" type="TileMapLayer" parent="."]
+z_index = 2
+texture_filter = 1
+position = Vector2(25, -80)
+scale = Vector2(2.345927, 2.345927)
+tile_map_data = PackedByteArray("AAAAAAkAAQAAAAMAAAAAAAgAAQAAAAIAAAAAAAcAAQACAAEAAAABAAkAAQACAAEAAAABAAoAAQAGAAIAAAD//wcAAQABAAEAAAD+/wcAAQABAAEAAAAEAAIAAQAGAAIAAAAEAP//AQAAAAIAAAAEAAAAAQAAAAIAAAAEAAEAAQACAAIAAAAMAA0AAQAGAAMAAAAMAA4AAQAFAAIAAAAMAA8AAQACAAIAAAA=")
+tile_set = ExtResource("1_6ovph")
+collision_enabled = false
+script = ExtResource("14_av1gt")
+dir = Vector2(1, 0)
+
+[node name="OverLayer2" type="TileMapLayer" parent="."]
 texture_filter = 1
 scale = Vector2(1.985, 1.985)
-tile_map_data = PackedByteArray("AAACABAAAQAFAAAAAAADABAAAQAFAAAAAAAGABAAAQAFAAAAAAAHABAAAQAFAAAAAAABAAAAAQAFAAAAAAACAAAAAQAFAAAAAAAIAAAAAQAFAAAAAAAMAAAAAQAFAAAAAAANAAAAAQAFAAAAAAAPAAUAAQAGAAAAAAAQAAUAAQAFAAAAAAAEAAUAAQAFAAAAAAACAAkAAQAFAAAAAAADAAkAAQAGAAAAAAAHAA0AAQADAAAAAAAQAA0AAQABAAAAAAAPAA0AAQABAAAAAAAAAAkAAQAAAAMAAAAAAAgAAQAAAAIAAAAAAAcAAQACAAEAAAABAAkAAQACAAEAAAABAAoAAQAGAAIAAAAPAA8AAQAGAAMAAAAPABAAAQAFAAIAAAAPABEAAQACAAIAAAD//wcAAQABAAEAAAD+/wcAAQABAAEAAAAEAAIAAQAGAAIAAAAEAP//AQAAAAIAAAAEAAAAAQAAAAIAAAAEAAEAAQACAAIAAAA=")
+tile_map_data = PackedByteArray("AAACABAAAQAFAAAAAAADABAAAQAFAAAAAAAGABAAAQAFAAAAAAAHABAAAQAFAAAAAAABAAAAAQAFAAAAAAACAAAAAQAFAAAAAAAIAAAAAQAFAAAAAAAMAAAAAQAFAAAAAAANAAAAAQAFAAAAAAAPAAUAAQAGAAAAAAAQAAUAAQAFAAAAAAAEAAUAAQAFAAAAAAACAAkAAQAFAAAAAAADAAkAAQAGAAAAAAAHAA0AAQADAAAAAAAQAA0AAQABAAAAAAAPAA0AAQABAAAAAAA=")
 tile_set = ExtResource("1_6ovph")
 collision_enabled = false
 
