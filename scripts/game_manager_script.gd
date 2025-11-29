@@ -164,6 +164,12 @@ func show_dialog() -> void:
 	# TODO: check bounds etc.
 	$DialogBody.visible = true
 	
+	if dialogIndex >= len(dialogs):
+		dialogIndex = 0
+	
+	if lineIndex >= len(dialogs[dialogIndex]):
+		lineIndex = 0
+	
 	var data = dialogs[dialogIndex][lineIndex]
 	
 	# TODO: show / hide the thingies
@@ -231,6 +237,10 @@ func dialog_next() -> void:
 	advance_dialog()
 
 func advance_dialog():
+	
+	if dialogIndex >= len(dialogs):
+		dialogIndex = 0
+		lineIndex = -1
 	
 	lineIndex += 1
 	if lineIndex >= len(dialogs[dialogIndex]):
@@ -401,7 +411,5 @@ func applyState() -> void:
 			hide_dialog()
 			# load thank you screen (with ending message) / menu
 			get_tree().change_scene_to_file("res://scenes/EndScene.tscn")
-		_:
-			$DialogBody.visible = true
-				
+		
 	pass

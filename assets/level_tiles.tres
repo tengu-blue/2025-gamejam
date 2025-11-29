@@ -7,7 +7,6 @@
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_locmk"]
 texture = ExtResource("1_d2siy")
 texture_region_size = Vector2i(32, 32)
-use_texture_padding = false
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -76,7 +75,6 @@ use_texture_padding = false
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sklfm"]
 texture = ExtResource("2_5ogt1")
 texture_region_size = Vector2i(32, 32)
-use_texture_padding = false
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:0/0 = 0
@@ -96,7 +94,6 @@ use_texture_padding = false
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l0t7r"]
 texture = ExtResource("3_5ogt1")
 texture_region_size = Vector2i(32, 32)
-use_texture_padding = false
 2:0/0 = 0
 3:0/0 = 0
 9:0/0 = 0

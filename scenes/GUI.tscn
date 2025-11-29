@@ -114,7 +114,6 @@ offset_left = 917.0
 offset_top = 1002.0
 offset_right = 1054.0
 offset_bottom = 1059.0
-focus_mode = 0
 text = "Give up"
 
 [connection signal="input_event" from="DialogBody/Area2D" to="DialogBody/PressToSkip" method="_on_area_2d_input_event"]

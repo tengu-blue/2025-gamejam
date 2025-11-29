@@ -7,6 +7,7 @@ var state := true
 @export var offset : int = 64
 
 var initPos : Vector2
+var spiking := false
 
 func _ready() -> void:
 	initPos = position
@@ -14,9 +15,11 @@ func _ready() -> void:
 
 func activate_feature():
 	position.x -= 1000
+	spiking = true
 	
 func deactivate_feature():
 	position.x += 1000
+	spiking = false
 
 # TODO: animation
 func toggle():
@@ -30,4 +33,5 @@ func toggle():
 	t.tween_property($".", "position", initPos, 0.2)	
 
 func _on_timer_timeout() -> void:
-	toggle()
+	if(spiking): 
+		toggle()

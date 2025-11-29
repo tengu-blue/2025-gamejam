@@ -5,7 +5,6 @@ extends Node2D
 # know when to use input and when to ignore etc.
 
 
-
 # Will toggle the separate layers 
 func show_layer(layer) -> void:
 	

@@ -10,6 +10,8 @@ size = Vector2(10, 10)
 script = ExtResource("1_awcob")
 
 [node name="Sprite2D" type="Sprite2D" parent="." groups=["Player"]]
+modulate = Color(1.8411881, 0.65382624, 0.22292884, 1)
+self_modulate = Color(0.7962617, 0.07255351, 0.08431349, 1)
 texture_filter = 1
 texture_repeat = 1
 texture = ExtResource("2_hkpaj")
