@@ -1,5 +1,17 @@
 extends CharacterBody2D
 
+func _ready() -> void:
+	position = $"../Spawn".position
+
+func death_anim() -> void:
+	# TODO:
+	position = $"../Spawn".position
+	velocity.x = 0
+	velocity.y = 0
+	jumping = false
+	on_wall = false
+	jumpCounter = 0
+
 
 @export var gravityScale : float = 1
 @export var accel : float = 1
@@ -12,10 +24,15 @@ extends CharacterBody2D
 @export var damp : float = 0.5
 @export var jumpDamp : float = 0.5
 
+@export var coyote_time : float = 0.1
+
 @export var jumpTime : float = 5
 var jumping : bool = false
 var jumpCounter : float = 0
 
+var last_ground : float = 0
+
+var wall_dir_left : bool = false
 var on_wall : bool = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,7 +44,7 @@ func _process(delta: float) -> void:
 		jumpCounter = 0
 	
 	# input
-	if Input.is_action_pressed("Left"):
+	if GameManager.can_move() and Input.is_action_pressed("Left"):
 		if(velocity.x > 0):
 			velocity.x *= damp * damp
 			
@@ -42,7 +59,7 @@ func _process(delta: float) -> void:
 			
 		action = true
 		
-	if Input.is_action_pressed("Right"):
+	if GameManager.can_move() and Input.is_action_pressed("Right"):
 		if(velocity.x < 0):
 			velocity.x *= damp * damp
 					
@@ -69,14 +86,19 @@ func _process(delta: float) -> void:
 		velocity.x = maxSpeed if velocity.x > 0 else -maxSpeed
 	
 	
-	if Input.is_action_just_pressed("Jump") and (is_on_floor() or on_wall) and !jumping:
+	if GameManager.can_move() and Input.is_action_just_pressed("Jump") and (is_on_floor() or on_wall or Time.get_ticks_msec() - last_ground < coyote_time*1000) and !jumping:
 		jumping = true
+		last_ground -= 1000
 	
 	if jumping:
 		jumpCounter += delta
 		
 		if(on_wall):
 			velocity.y -= jumpStr * 0.85
+			if(wall_dir_left):
+				velocity.x += airSpeed * 20 * delta
+			else:
+				velocity.x -= airSpeed * 20 * delta
 		else:
 			velocity.y -= jumpStr
 			
@@ -88,18 +110,21 @@ func _process(delta: float) -> void:
 		velocity.y *= jumpDamp
 	
 	
-	# gravity
-	if !on_wall or (!jumping and velocity.y < 0):
-		velocity += delta * get_gravity() * gravityScale
-	else:
-		# slide ?
-		velocity += delta * get_gravity() * gravityScale * 0.1
+	# coyote
+	if Time.get_ticks_msec() - last_ground >= coyote_time*1000:
+		# gravity
+		if !on_wall or (!jumping and velocity.y < 0):
+			velocity += delta * get_gravity() * gravityScale
+		else:
+			# slide ?
+			velocity += delta * get_gravity() * gravityScale * 0.1
 	
 
-func can_wall_jump():
+func can_wall_jump(left : bool):
 	on_wall = true
 	jumping = false
 	jumpCounter = 0
+	wall_dir_left = left
 	
 func cannot_wall_jump():
 	on_wall = false
@@ -108,4 +133,10 @@ func _physics_process(_delta) -> void:
 	move_and_slide()
 	
 	if is_on_floor():
+		last_ground = Time.get_ticks_msec()
 		jumping = false
+		
+# -------------------------------------------------------
+
+func hit():
+	death_anim()

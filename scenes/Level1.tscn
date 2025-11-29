@@ -1,52 +1,87 @@
-[gd_scene load_steps=7 format=4 uid="uid://da36jwyg52jy4"]
+[gd_scene load_steps=14 format=4 uid="uid://da36jwyg52jy4"]
 
 [ext_resource type="TileSet" uid="uid://bmrv70o5g5e3o" path="res://assets/level_tiles.tres" id="1_6ovph"]
 [ext_resource type="Script" uid="uid://bsjkciqkxfgrl" path="res://scripts/level.gd" id="1_bwv4p"]
 [ext_resource type="PackedScene" uid="uid://bsiwqct5gakw8" path="res://scenes/PlayerController.tscn" id="3_odhdn"]
 [ext_resource type="Script" uid="uid://b70d53jyim60t" path="res://scripts/pikes.gd" id="4_dw26h"]
+[ext_resource type="Script" uid="uid://bf0rlqfuytv4b" path="res://scripts/pits.gd" id="4_jxjwb"]
+[ext_resource type="Script" uid="uid://bwybjg1ff5its" path="res://scripts/platforms.gd" id="4_kbo48"]
+[ext_resource type="PackedScene" uid="uid://c8ff4uh5m2spy" path="res://scenes/Damager.tscn" id="4_svatc"]
 [ext_resource type="PackedScene" uid="uid://c5a8uhvxo4j4g" path="res://scenes/Sawblade.tscn" id="5_lrl65"]
+[ext_resource type="Script" uid="uid://me0tpw3b6045" path="res://scripts/moving_spikes.gd" id="5_n34uq"]
+[ext_resource type="Script" uid="uid://c4snlhnvrnyxo" path="res://scripts/spikes.gd" id="6_4dyl1"]
 [ext_resource type="PackedScene" uid="uid://bdp4blnqtqpda" path="res://scenes/WallJumpPoint.tscn" id="6_76388"]
+[ext_resource type="PackedScene" uid="uid://6eecpefh5tin" path="res://scenes/Goal.tscn" id="8_ecr63"]
+[ext_resource type="PackedScene" uid="uid://dit2l41vwb1o0" path="res://scenes/Pike.tscn" id="10_2meft"]
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_bwv4p")
 
+[node name="Spawn" type="Node2D" parent="."]
+position = Vector2(159, 981)
+
 [node name="PlayerController" parent="." instance=ExtResource("3_odhdn")]
-position = Vector2(283, 935)
+position = Vector2(283, 937.00006)
 scale = Vector2(3, 3)
-gravityScale = 0.9
+gravityScale = 1.5
 accel = 1600.0
 maxSpeed = 250.0
 initAccel = 0.9
 airSpeed = 1800.0
-jumpStr = 230.0
+jumpStr = 290.0
 damp = 0.45
 jumpDamp = 0.4
+coyote_time = 0.08
 jumpTime = 0.02
 
-[node name="BaseLayer" type="TileMapLayer" parent="."]
-texture_filter = 1
-scale = Vector2(1.985, 1.985)
-tile_map_data = PackedByteArray("AAABAAAAAgABAAEAAAABABAAAgABAAEAAAACAAAAAgABAAEAAAACABAAAgABAAEAAAADAAAAAgABAAEAAAADABAAAgABAAEAAAAEAAAAAgABAAEAAAAEABAAAgABAAEAAAAFAAAAAgABAAEAAAAFABAAAgABAAEAAAAGAAAAAgABAAEAAAAGABAAAgABAAEAAAAHAAAAAgABAAEAAAAHABAAAgABAAEAAAAIAAAAAgABAAEAAAAIABAAAgABAAEAAAAJAAAAAgABAAEAAAAJABAAAgABAAEAAAAKAAAAAgABAAEAAAAKABAAAgABAAEAAAALAAAAAgABAAEAAAALABAAAgABAAEAAAAMAAAAAgABAAEAAAAMABAAAgABAAEAAAANAAAAAgABAAEAAAANABAAAgABAAEAAAAOAAAAAgABAAEAAAAOABAAAgABAAEAAAAPAAAAAgABAAEAAAAPABAAAgABAAEAAAAQAAAAAgABAAEAAAAQABAAAgABAAEAAAAAAAAAAgABAAEAAAAAAAEAAgABAAEAAAAAAAIAAgABAAEAAAAAAAMAAgABAAEAAAAAAAQAAgABAAEAAAAAAAUAAgABAAEAAAAAAAYAAgABAAEAAAAAAAcAAgABAAEAAAAAAAgAAgABAAEAAAAAAAkAAgABAAEAAAAAAAoAAgABAAEAAAAAAAsAAgABAAEAAAAAAAwAAgABAAEAAAAAAA0AAgABAAEAAAAAAA4AAgABAAEAAAAAAA8AAgABAAEAAAAAABAAAgABAAEAAAAQAAEAAgABAAEAAAAQAAIAAgABAAEAAAAQAAMAAgABAAEAAAAQAAQAAgABAAEAAAAQAAUAAgABAAEAAAAQAAYAAgABAAEAAAAQAAcAAgABAAEAAAAQAAgAAgABAAEAAAAQAAkAAgABAAEAAAAQAAoAAgABAAEAAAAQAAsAAgABAAEAAAAQAAwAAgABAAEAAAAQAA0AAgABAAEAAAAQAA4AAgABAAEAAAAQAA8AAgABAAEAAAADAA4AAgAAAAAAAAABAA0AAgAAAAAAAAABAA4AAgAAAAEAAAABAA8AAgAAAAEAAAADAA8AAgAAAAEAAAADAA0AAgAAAAEAAAAFAA4AAgAAAAEAAAAOAA0AAgAAAAEAAAAPAA0AAgAAAAEAAAAPAAwAAgAAAAEAAAAPAAsAAgAAAAAAAAANAAoAAgAAAAAAAAAPAAkAAgAAAAAAAAAPAAoAAgAAAAEAAAANAAkAAgAAAAEAAAAKAAkAAgAAAAEAAAAPAAUAAgAAAAEAAAAOAAUAAgAAAAEAAAANAAUAAgAAAAEAAAALAAUAAgAAAAEAAAAKAAUAAgAAAAEAAAAJAAUAAgAAAAEAAAAHAAUAAgAAAAEAAAAGAAUAAgAAAAEAAAAFAAUAAgAAAAEAAAABAAkAAgAAAAEAAAACAAkAAgAAAAEAAAADAAkAAgAAAAEAAAAFAAkAAgAAAAEAAAAGAAkAAgAAAAEAAAAIAAkAAgAAAAEAAAABAAUAAgAAAAAAAAADAAUAAgAAAAEAAAAHAA0AAgAAAAEAAAALAA0AAgAAAAEAAAABAAcAAgAAAAAAAAADAAYAAgAAAAAAAAABAAYAAgAAAAEAAAABAAgAAgAAAAEAAAA=")
-tile_set = ExtResource("1_6ovph")
-
 [node name="Pits" type="TileMapLayer" parent="."]
-visible = false
 texture_filter = 1
 scale = Vector2(1.985, 1.985)
 tile_map_data = PackedByteArray("AAAIAA0AAgAAAAEAAAAKAA0AAgAAAAEAAAAEAAkAAgAAAAEAAAA=")
 tile_set = ExtResource("1_6ovph")
+script = ExtResource("4_jxjwb")
 
 [node name="Platforms" type="TileMapLayer" parent="."]
 texture_filter = 1
 scale = Vector2(1.985, 1.985)
-tile_map_data = PackedByteArray("AAAJAA0AAgAAAAEAAAAEAAUAAgAAAAEAAAA=")
+tile_map_data = PackedByteArray("AAAJAA0AAgAAAAEAAAAFAAUAAgAAAAEAAAA=")
 tile_set = ExtResource("1_6ovph")
+script = ExtResource("4_kbo48")
+offset = 1000
+
+[node name="Damager11" parent="Platforms" instance=ExtResource("4_svatc")]
+position = Vector2(303.27454, 436.7758)
+scale = Vector2(6.9043174, 6.9043174)
+
+[node name="Damager12" parent="Platforms" instance=ExtResource("4_svatc")]
+position = Vector2(176.8262, 180.85643)
+scale = Vector2(6.9043174, 6.9043174)
+
+[node name="Timer" type="Timer" parent="Platforms"]
+autostart = true
 
 [node name="MorePlatforms" type="TileMapLayer" parent="."]
 texture_filter = 1
 scale = Vector2(1.985, 1.985)
 tile_map_data = PackedByteArray("AAAMAA0AAgAAAAEAAAALAAkAAgAAAAEAAAAMAAkAAgAAAAEAAAA=")
 tile_set = ExtResource("1_6ovph")
+script = ExtResource("4_kbo48")
+offset = 1000
+
+[node name="Damager11" parent="MorePlatforms" instance=ExtResource("4_svatc")]
+position = Vector2(399.49622, 435.2645)
+scale = Vector2(6.9043174, 6.9043174)
+
+[node name="Damager12" parent="MorePlatforms" instance=ExtResource("4_svatc")]
+position = Vector2(368.26196, 308.31232)
+scale = Vector2(6.9043174, 6.9043174)
+
+[node name="Damager13" parent="MorePlatforms" instance=ExtResource("4_svatc")]
+position = Vector2(398.99246, 308.31238)
+scale = Vector2(6.9043174, 6.9043174)
+
+[node name="Timer" type="Timer" parent="MorePlatforms"]
+autostart = true
 
 [node name="SpikesLayers" type="TileMapLayer" parent="."]
 texture_filter = 1
@@ -54,13 +89,67 @@ rotation = 3.1415927
 scale = Vector2(1.985, 1.985)
 tile_map_data = PackedByteArray("AAD3//D/AwAHAAgAAAD1//D/AwAHAAgAAADz//D/AwAHAAgAAADy//D/AwAHAAgAAAD5//v/AwAHAAgAAAD5//X/AwAFAAcAAAD3//X/AwAFAAcAAAD1//X/AwAFAAcAAAA=")
 tile_set = ExtResource("1_6ovph")
+script = ExtResource("6_4dyl1")
+
+[node name="Damager" parent="SpikesLayers" instance=ExtResource("4_svatc")]
+position = Vector2(-271.53653, -511.83878)
+rotation = 3.1415927
+scale = Vector2(6.904316, 6.904316)
+
+[node name="Damager5" parent="SpikesLayers" instance=ExtResource("4_svatc")]
+position = Vector2(-336.02014, -511.8387)
+rotation = 3.1415927
+scale = Vector2(6.904316, 6.904316)
+
+[node name="Damager6" parent="SpikesLayers" instance=ExtResource("4_svatc")]
+position = Vector2(-431.73804, -511.83868)
+rotation = 3.1415927
+scale = Vector2(6.904316, 6.904316)
+
+[node name="Damager8" parent="SpikesLayers" instance=ExtResource("4_svatc")]
+position = Vector2(-209.06798, -159.6977)
+rotation = 3.1415927
+scale = Vector2(6.904316, 6.904316)
+
+[node name="Damager7" parent="SpikesLayers" instance=ExtResource("4_svatc")]
+position = Vector2(-400.50378, -511.8387)
+rotation = 3.1415927
+scale = Vector2(6.904316, 6.904316)
+
+[node name="Damager2" parent="SpikesLayers" instance=ExtResource("4_svatc")]
+position = Vector2(-209.06802, -320.40295)
+scale = Vector2(6.904316, 6.904316)
+
+[node name="Damager3" parent="SpikesLayers" instance=ExtResource("4_svatc")]
+position = Vector2(-271.53656, -320.40298)
+scale = Vector2(6.904316, 6.904316)
+
+[node name="Damager4" parent="SpikesLayers" instance=ExtResource("4_svatc")]
+position = Vector2(-337.02774, -321.91434)
+scale = Vector2(6.904316, 6.904316)
 
 [node name="MovingSpikes" type="TileMapLayer" parent="."]
 texture_filter = 1
+position = Vector2(0, 64)
 rotation = 3.1415927
 scale = Vector2(1.985, 1.985)
 tile_map_data = PackedByteArray("AAD1//v/AwAHAAgAAAD3//f/AwAHAAgAAAA=")
 tile_set = ExtResource("1_6ovph")
+script = ExtResource("5_n34uq")
+offset = -64
+
+[node name="Damager9" parent="MovingSpikes" instance=ExtResource("4_svatc")]
+position = Vector2(-272.0403, -287.1536)
+rotation = -3.1415925
+scale = Vector2(6.9043164, 6.9043164)
+
+[node name="Damager10" parent="MovingSpikes" instance=ExtResource("4_svatc")]
+position = Vector2(-335.51642, -159.69766)
+rotation = -3.1415925
+scale = Vector2(6.9043164, 6.9043164)
+
+[node name="Timer" type="Timer" parent="MovingSpikes"]
+autostart = true
 
 [node name="Hardest" type="Node2D" parent="."]
 texture_filter = 1
@@ -68,25 +157,112 @@ texture_filter = 1
 [node name="MorePikes" type="Node2D" parent="Hardest"]
 script = ExtResource("4_dw26h")
 
+[node name="Pike4" parent="Hardest/MorePikes" instance=ExtResource("10_2meft")]
+position = Vector2(860, 626)
+scale = Vector2(1, 1.9832962)
+distance = Vector2(0, -65)
+
+[node name="Pike5" parent="Hardest/MorePikes" instance=ExtResource("10_2meft")]
+position = Vector2(1159.1577, 546)
+rotation = -1.5707964
+scale = Vector2(1, 5.8197947)
+distance = Vector2(-150, 0)
+
+[node name="Pike6" parent="Hardest/MorePikes" instance=ExtResource("10_2meft")]
+position = Vector2(417, 504)
+scale = Vector2(1, 4.9453173)
+distance = Vector2(0, -250)
+
+[node name="Pike7" parent="Hardest/MorePikes" instance=ExtResource("10_2meft")]
+position = Vector2(670, 506)
+scale = Vector2(1, 4.9453173)
+distance = Vector2(0, -250)
+
 [node name="MoreMovingSpikes" type="TileMapLayer" parent="Hardest"]
 texture_filter = 1
+position = Vector2(0, 64)
 rotation = 3.1415927
 scale = Vector2(1.985, 1.985)
 tile_map_data = PackedByteArray("AAD2//D/AwAHAAgAAAD0//D/AwAHAAgAAADy//v/AwAHAAgAAADw//v/AwAHAAgAAAD9//f/AwAHAAgAAAD6//f/AwAHAAgAAAD7//v/AwAHAAgAAADx//P/AwAHAAgAAAA=")
 tile_set = ExtResource("1_6ovph")
+script = ExtResource("5_n34uq")
+offset = -64
+
+[node name="Damager11" parent="Hardest/MoreMovingSpikes" instance=ExtResource("4_svatc")]
+position = Vector2(-175.3149, -287.15366)
+rotation = -3.1415925
+scale = Vector2(6.9043174, 6.9043174)
+
+[node name="Damager16" parent="Hardest/MoreMovingSpikes" instance=ExtResource("4_svatc")]
+position = Vector2(-143.57686, -158.18637)
+rotation = -3.1415925
+scale = Vector2(6.9043174, 6.9043174)
+
+[node name="Damager17" parent="Hardest/MoreMovingSpikes" instance=ExtResource("4_svatc")]
+position = Vector2(-430.73053, -158.69012)
+rotation = -3.1415925
+scale = Vector2(6.9043174, 6.9043174)
+
+[node name="Damager18" parent="Hardest/MoreMovingSpikes" instance=ExtResource("4_svatc")]
+position = Vector2(-495.21405, -158.18637)
+rotation = -3.1415925
+scale = Vector2(6.9043174, 6.9043174)
+
+[node name="Damager12" parent="Hardest/MoreMovingSpikes" instance=ExtResource("4_svatc")]
+position = Vector2(-78.58947, -286.64987)
+rotation = -3.1415925
+scale = Vector2(6.9043174, 6.9043174)
+
+[node name="Damager13" parent="Hardest/MoreMovingSpikes" instance=ExtResource("4_svatc")]
+position = Vector2(-462.97232, -414.10577)
+rotation = -3.1415925
+scale = Vector2(6.9043174, 6.9043174)
+
+[node name="Damager14" parent="Hardest/MoreMovingSpikes" instance=ExtResource("4_svatc")]
+position = Vector2(-366.24686, -510.83124)
+rotation = -3.1415925
+scale = Vector2(6.9043174, 6.9043174)
+
+[node name="Damager15" parent="Hardest/MoreMovingSpikes" instance=ExtResource("4_svatc")]
+position = Vector2(-302.7708, -511.33502)
+rotation = -3.1415925
+scale = Vector2(6.9043174, 6.9043174)
+
+[node name="Timer" type="Timer" parent="Hardest/MoreMovingSpikes"]
+autostart = true
 
 [node name="Pikes" type="Node2D" parent="."]
 script = ExtResource("4_dw26h")
 
+[node name="Pike" parent="Pikes" instance=ExtResource("10_2meft")]
+position = Vector2(92.99999, 285.00003)
+rotation = 1.5707964
+scale = Vector2(1, 3.7204237)
+distance = Vector2(-200, 0)
+
+[node name="Pike2" parent="Pikes" instance=ExtResource("10_2meft")]
+position = Vector2(82.00001, 797)
+rotation = 1.5707964
+scale = Vector2(1, 3.7204237)
+distance = Vector2(-200, 0)
+
+[node name="Pike3" parent="Pikes" instance=ExtResource("10_2meft")]
+position = Vector2(411.99997, 956.785)
+scale = Vector2(1, 4.9453173)
+distance = Vector2(0, 200)
+
 [node name="Sawblade" parent="." instance=ExtResource("5_lrl65")]
 position = Vector2(542.00006, 183)
 scale = Vector2(4.3599997, 4.3599997)
+speed = 30.0
+position2 = Vector2(0, 560)
 
 [node name="StickWall" type="Node2D" parent="."]
 
 [node name="WallJumpPoint" parent="StickWall" instance=ExtResource("6_76388")]
 position = Vector2(247, 922)
 scale = Vector2(1, 2.3199997)
+left = true
 
 [node name="WallJumpPoint2" parent="StickWall" instance=ExtResource("6_76388")]
 position = Vector2(198, 922)
@@ -95,6 +271,7 @@ scale = Vector2(1, 2.3199997)
 [node name="WallJumpPoint3" parent="StickWall" instance=ExtResource("6_76388")]
 position = Vector2(119, 857)
 scale = Vector2(1, 2.3199997)
+left = true
 
 [node name="WallJumpPoint4" parent="StickWall" instance=ExtResource("6_76388")]
 position = Vector2(960, 731)
@@ -103,19 +280,37 @@ scale = Vector2(1, 2.3199997)
 [node name="WallJumpPoint5" parent="StickWall" instance=ExtResource("6_76388")]
 position = Vector2(882, 667)
 scale = Vector2(1, 2.3199997)
+left = true
 
 [node name="WallJumpPoint6" parent="StickWall" instance=ExtResource("6_76388")]
 position = Vector2(960, 603)
 scale = Vector2(1, 2.3199997)
 
 [node name="WallJumpPoint7" parent="StickWall" instance=ExtResource("6_76388")]
-position = Vector2(119, 477)
+position = Vector2(120, 477)
 scale = Vector2(1, 2.3199997)
+left = true
 
 [node name="WallJumpPoint8" parent="StickWall" instance=ExtResource("6_76388")]
 position = Vector2(198, 414)
 scale = Vector2(1, 2.3199997)
 
 [node name="WallJumpPoint9" parent="StickWall" instance=ExtResource("6_76388")]
-position = Vector2(121, 348)
+position = Vector2(120, 348)
 scale = Vector2(1, 2.3199997)
+left = true
+
+[node name="BaseLayer" type="TileMapLayer" parent="."]
+texture_filter = 1
+scale = Vector2(1.985, 1.985)
+tile_map_data = PackedByteArray("AAABAAAAAgABAAEAAAABABAAAgABAAEAAAACAAAAAgABAAEAAAACABAAAgABAAEAAAADAAAAAgABAAEAAAADABAAAgABAAEAAAAEAAAAAgABAAEAAAAEABAAAgABAAEAAAAFAAAAAgABAAEAAAAFABAAAgABAAEAAAAGAAAAAgABAAEAAAAGABAAAgABAAEAAAAHAAAAAgABAAEAAAAHABAAAgABAAEAAAAIAAAAAgABAAEAAAAIABAAAgABAAEAAAAJAAAAAgABAAEAAAAJABAAAgABAAEAAAAKAAAAAgABAAEAAAAKABAAAgABAAEAAAALAAAAAgABAAEAAAALABAAAgABAAEAAAAMAAAAAgABAAEAAAAMABAAAgABAAEAAAANAAAAAgABAAEAAAANABAAAgABAAEAAAAOAAAAAgABAAEAAAAOABAAAgABAAEAAAAPAAAAAgABAAEAAAAPABAAAgABAAEAAAAQAAAAAgABAAEAAAAQABAAAgABAAEAAAAAAAAAAgABAAEAAAAAAAEAAgABAAEAAAAAAAIAAgABAAEAAAAAAAMAAgABAAEAAAAAAAQAAgABAAEAAAAAAAUAAgABAAEAAAAAAAYAAgABAAEAAAAAAAcAAgABAAEAAAAAAAgAAgABAAEAAAAAAAkAAgABAAEAAAAAAAoAAgABAAEAAAAAAAsAAgABAAEAAAAAAAwAAgABAAEAAAAAAA0AAgABAAEAAAAAAA4AAgABAAEAAAAAAA8AAgABAAEAAAAAABAAAgABAAEAAAAQAAEAAgABAAEAAAAQAAIAAgABAAEAAAAQAAMAAgABAAEAAAAQAAQAAgABAAEAAAAQAAUAAgABAAEAAAAQAAYAAgABAAEAAAAQAAcAAgABAAEAAAAQAAgAAgABAAEAAAAQAAkAAgABAAEAAAAQAAoAAgABAAEAAAAQAAsAAgABAAEAAAAQAAwAAgABAAEAAAAQAA0AAgABAAEAAAAQAA4AAgABAAEAAAAQAA8AAgABAAEAAAADAA4AAgAAAAAAAAABAA0AAgAAAAAAAAABAA4AAgAAAAEAAAABAA8AAgAAAAEAAAADAA8AAgAAAAEAAAADAA0AAgAAAAEAAAAFAA4AAgAAAAEAAAAOAA0AAgAAAAEAAAAPAA0AAgAAAAEAAAAPAAwAAgAAAAEAAAAPAAsAAgAAAAAAAAANAAoAAgAAAAAAAAAPAAkAAgAAAAAAAAAPAAoAAgAAAAEAAAANAAkAAgAAAAEAAAAKAAkAAgAAAAEAAAAPAAUAAgAAAAEAAAAOAAUAAgAAAAEAAAANAAUAAgAAAAEAAAALAAUAAgAAAAEAAAAKAAUAAgAAAAEAAAAJAAUAAgAAAAEAAAAHAAUAAgAAAAEAAAAGAAUAAgAAAAEAAAABAAkAAgAAAAEAAAACAAkAAgAAAAEAAAADAAkAAgAAAAEAAAAFAAkAAgAAAAEAAAAGAAkAAgAAAAEAAAAIAAkAAgAAAAEAAAABAAUAAgAAAAAAAAADAAUAAgAAAAEAAAAHAA0AAgAAAAEAAAALAA0AAgAAAAEAAAADAAYAAgAAAAAAAAABAAYAAgAAAAEAAAABAAgAAgAAAAEAAAAEAAUAAgAAAAEAAAABAAcAAgAAAAAAAAA=")
+tile_set = ExtResource("1_6ovph")
+
+[node name="Goal" parent="." instance=ExtResource("8_ecr63")]
+position = Vector2(918, 291)
+scale = Vector2(2.6, 2.6)
+
+[connection signal="timeout" from="Platforms/Timer" to="Platforms" method="_on_timer_timeout"]
+[connection signal="timeout" from="MorePlatforms/Timer" to="MorePlatforms" method="_on_timer_timeout"]
+[connection signal="timeout" from="MovingSpikes/Timer" to="MovingSpikes" method="_on_timer_timeout"]
+[connection signal="timeout" from="Hardest/MoreMovingSpikes/Timer" to="Hardest/MoreMovingSpikes" method="_on_timer_timeout"]

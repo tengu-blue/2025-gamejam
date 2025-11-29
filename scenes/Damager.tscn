@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8ff4uh5m2spy"]
+
+[ext_resource type="Script" uid="uid://n2kkbajw5322" path="res://scripts/damager.gd" id="1_addqy"]
+
+[node name="Damager" type="Area2D"]
+script = ExtResource("1_addqy")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." groups=["Damager"]]
+polygon = PackedVector2Array(2, 0, 0, -2, -2, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

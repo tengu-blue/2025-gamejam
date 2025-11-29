@@ -60,6 +60,8 @@ offset_left = 163.0
 offset_top = 783.0
 offset_right = 387.0
 offset_bottom = 922.0
+focus_neighbor_left = NodePath("../Platforms")
+focus_neighbor_right = NodePath("../Pits")
 text = "Option1"
 
 [node name="Pits" type="Button" parent="."]
@@ -67,6 +69,8 @@ offset_left = 435.0
 offset_top = 774.0
 offset_right = 659.0
 offset_bottom = 913.0
+focus_neighbor_left = NodePath("../Spikes")
+focus_neighbor_right = NodePath("../Platforms")
 text = "Option2"
 
 [node name="Pikes" type="Button" parent="."]
@@ -74,6 +78,8 @@ offset_left = 575.0
 offset_top = 781.0
 offset_right = 799.0
 offset_bottom = 920.0
+focus_neighbor_left = NodePath("../Sawblade")
+focus_neighbor_right = NodePath("../Sawblade")
 text = "Option3"
 
 [node name="Sawblade" type="Button" parent="."]
@@ -81,6 +87,8 @@ offset_left = 304.0
 offset_top = 777.0
 offset_right = 528.0
 offset_bottom = 916.0
+focus_neighbor_left = NodePath("../Pikes")
+focus_neighbor_right = NodePath("../Pikes")
 text = "Option5"
 
 [node name="Platforms" type="Button" parent="."]
@@ -88,6 +96,8 @@ offset_left = 710.0
 offset_top = 780.0
 offset_right = 934.0
 offset_bottom = 919.0
+focus_neighbor_left = NodePath("../Pits")
+focus_neighbor_right = NodePath("../Spikes")
 text = "Option4"
 
 [node name="BeatLevel" type="Button" parent="."]
@@ -95,6 +105,7 @@ offset_left = 205.0
 offset_top = 1000.0
 offset_right = 384.0
 offset_bottom = 1065.0
+focus_mode = 0
 text = "Beat"
 script = ExtResource("4_shsct")
 
@@ -103,6 +114,7 @@ offset_left = 917.0
 offset_top = 1002.0
 offset_right = 1054.0
 offset_bottom = 1059.0
+focus_mode = 0
 text = "Give up"
 
 [connection signal="input_event" from="DialogBody/Area2D" to="DialogBody/PressToSkip" method="_on_area_2d_input_event"]

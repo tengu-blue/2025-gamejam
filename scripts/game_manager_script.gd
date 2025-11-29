@@ -68,6 +68,9 @@ var currentState := GameState.Menu
 func advance_state():
 	currentState = nextState[currentState]
 
+func can_move() -> bool:	
+	return !$DialogBody.visible
+
 # -------------------------------------------------------------------------
 
 # The dialogs
@@ -271,10 +274,22 @@ func show_available_options() -> void:
 		$Spikes.visible = !used_options.has("spikes")
 		$Pits.visible = !used_options.has("pits")
 		$Platforms.visible = !used_options.has("platforms")
+		
+		if $Spikes.visible:
+			$Spikes.grab_focus()
+		elif $Pits.visible:
+			$Pits.grab_focus()
+		else:
+			$Platforms.grab_focus()
 	
 	if currentState == GameState.ThirdLevelChoice:
 		$Sawblade.visible = !used_options.has("sawblade")
 		$Pikes.visible = !used_options.has("pikes")
+		
+		if $Sawblade.visible:
+			$Sawblade.grab_focus()
+		else:
+			$Pikes.grab_focus()
 
 func hide_options() -> void:
 	$Spikes.visible = false
@@ -372,6 +387,7 @@ func applyState() -> void:
 			hide_dialog()
 			$"/root/Level1".show_layer("hardest")	
 			$GiveUp.visible = true
+			$GiveUp.grab_focus()
 		
 		GameState.Won:
 			show_dialog()

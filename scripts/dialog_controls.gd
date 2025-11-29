@@ -11,3 +11,4 @@ func _process(delta: float) -> void:
 	
 	if $"..".visible and Input.is_action_just_pressed("Next"):
 		GameManager.dialog_next()
+		
