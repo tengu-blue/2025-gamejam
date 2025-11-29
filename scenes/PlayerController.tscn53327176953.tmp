@@ -6,13 +6,13 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_awcob"]
 size = Vector2(10, 10)
 
-[node name="PlayerController" type="CharacterBody2D" groups=["Player"]]
+[node name="PlayerController" type="CharacterBody2D"]
 script = ExtResource("1_awcob")
 
-[node name="Sprite2D" type="Sprite2D" parent="." groups=["Player"]]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture_repeat = 1
 texture = ExtResource("2_hkpaj")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Player"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_awcob")

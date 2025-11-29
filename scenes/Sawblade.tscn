@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5a8uhvxo4j4g"]
+
+[ext_resource type="Texture2D" uid="uid://d3ru6hl7eas2r" path="res://assets/craftpix-net-111332-free-factory-pixel-art-32x32-tileset-for-cyberpunk/4 Animated objects/Saw.png" id="1_rerb1"]
+[ext_resource type="Script" uid="uid://wv5ti5bu2p5b" path="res://scripts/sawblade.gd" id="2_lcdmq"]
+
+[node name="Sawblade" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_rerb1")
+region_enabled = true
+region_rect = Rect2(160, 0, 32, 32)
+script = ExtResource("2_lcdmq")

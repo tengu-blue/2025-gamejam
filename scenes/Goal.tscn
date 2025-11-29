@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://6eecpefh5tin"]
+
+[ext_resource type="Texture2D" uid="uid://uslli7hq8sfr" path="res://assets/craftpix-net-926878-free-platformer-game-tileset-pixel-art/PNG/Objects.png" id="1_grq7m"]
+[ext_resource type="Script" uid="uid://bwoudwmut38qj" path="res://scripts/goal.gd" id="2_sos67"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_grq7m"]
+
+[node name="Goal" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_grq7m")
+region_enabled = true
+region_rect = Rect2(387, 227, 29, 29)
+script = ExtResource("2_sos67")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_grq7m")

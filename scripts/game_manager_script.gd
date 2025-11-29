@@ -207,12 +207,22 @@ func level_give_up() -> void:
 	applyState()
 
 func dialog_next() -> void:
+	if currentState == GameState.Menu:
+		return
+	
+	if currentState == GameState.FirstLevelPlay:
+		return
+	
 	# have to pick from the options to advance
 	if currentState == GameState.SecondLevelChoice:
 		return
 	
+	
 	# have to pick from the options to advance
 	if currentState == GameState.ThirdLevelChoice:
+		return
+	
+	if currentState == GameState.Four:
 		return
 	
 	advance_dialog()
@@ -315,8 +325,10 @@ func applyState() -> void:
 	match currentState:
 		GameState.Menu:
 			hide_dialog()
+			hide_options()
 			dialogIndex = 0
 			lineIndex = 0
+			$GiveUp.visible = false
 		
 		GameState.Introduction:
 			show_dialog()
@@ -358,17 +370,21 @@ func applyState() -> void:
 		
 		GameState.Four:
 			hide_dialog()
+			$"/root/Level1".show_layer("hardest")	
+			$GiveUp.visible = true
 		
 		GameState.Won:
 			show_dialog()
+			$GiveUp.visible = false
 		
 		GameState.End:
 			show_dialog()
+			$GiveUp.visible = false
 		
 		GameState.PostEnd:
 			hide_dialog()
 			# load thank you screen (with ending message) / menu
-		
+			get_tree().change_scene_to_file("res://scenes/EndScene.tscn")
 		_:
 			$DialogBody.visible = true
 				

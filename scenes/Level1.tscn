@@ -1,13 +1,121 @@
-[gd_scene load_steps=3 format=4 uid="uid://da36jwyg52jy4"]
+[gd_scene load_steps=7 format=4 uid="uid://da36jwyg52jy4"]
 
 [ext_resource type="TileSet" uid="uid://bmrv70o5g5e3o" path="res://assets/level_tiles.tres" id="1_6ovph"]
 [ext_resource type="Script" uid="uid://bsjkciqkxfgrl" path="res://scripts/level.gd" id="1_bwv4p"]
+[ext_resource type="PackedScene" uid="uid://bsiwqct5gakw8" path="res://scenes/PlayerController.tscn" id="3_odhdn"]
+[ext_resource type="Script" uid="uid://b70d53jyim60t" path="res://scripts/pikes.gd" id="4_dw26h"]
+[ext_resource type="PackedScene" uid="uid://c5a8uhvxo4j4g" path="res://scenes/Sawblade.tscn" id="5_lrl65"]
+[ext_resource type="PackedScene" uid="uid://bdp4blnqtqpda" path="res://scenes/WallJumpPoint.tscn" id="6_76388"]
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_bwv4p")
 
+[node name="PlayerController" parent="." instance=ExtResource("3_odhdn")]
+position = Vector2(283, 935)
+scale = Vector2(3, 3)
+gravityScale = 0.9
+accel = 1600.0
+maxSpeed = 250.0
+initAccel = 0.9
+airSpeed = 1800.0
+jumpStr = 230.0
+damp = 0.45
+jumpDamp = 0.4
+jumpTime = 0.02
+
 [node name="BaseLayer" type="TileMapLayer" parent="."]
 texture_filter = 1
 scale = Vector2(1.985, 1.985)
-tile_map_data = PackedByteArray("AAABAAAAAgABAAEAAAABABAAAgABAAEAAAACAAAAAgABAAEAAAACABAAAgABAAEAAAADAAAAAgABAAEAAAADABAAAgABAAEAAAAEAAAAAgABAAEAAAAEABAAAgABAAEAAAAFAAAAAgABAAEAAAAFABAAAgABAAEAAAAGAAAAAgABAAEAAAAGABAAAgABAAEAAAAHAAAAAgABAAEAAAAHABAAAgABAAEAAAAIAAAAAgABAAEAAAAIABAAAgABAAEAAAAJAAAAAgABAAEAAAAJABAAAgABAAEAAAAKAAAAAgABAAEAAAAKABAAAgABAAEAAAALAAAAAgABAAEAAAALABAAAgABAAEAAAAMAAAAAgABAAEAAAAMABAAAgABAAEAAAANAAAAAgABAAEAAAANABAAAgABAAEAAAAOAAAAAgABAAEAAAAOABAAAgABAAEAAAAPAAAAAgABAAEAAAAPABAAAgABAAEAAAAQAAAAAgABAAEAAAAQABAAAgABAAEAAAAAAAAAAgABAAEAAAAAAAEAAgABAAEAAAAAAAIAAgABAAEAAAAAAAMAAgABAAEAAAAAAAQAAgABAAEAAAAAAAUAAgABAAEAAAAAAAYAAgABAAEAAAAAAAcAAgABAAEAAAAAAAgAAgABAAEAAAAAAAkAAgABAAEAAAAAAAoAAgABAAEAAAAAAAsAAgABAAEAAAAAAAwAAgABAAEAAAAAAA0AAgABAAEAAAAAAA4AAgABAAEAAAAAAA8AAgABAAEAAAAAABAAAgABAAEAAAAQAAEAAgABAAEAAAAQAAIAAgABAAEAAAAQAAMAAgABAAEAAAAQAAQAAgABAAEAAAAQAAUAAgABAAEAAAAQAAYAAgABAAEAAAAQAAcAAgABAAEAAAAQAAgAAgABAAEAAAAQAAkAAgABAAEAAAAQAAoAAgABAAEAAAAQAAsAAgABAAEAAAAQAAwAAgABAAEAAAAQAA0AAgABAAEAAAAQAA4AAgABAAEAAAAQAA8AAgABAAEAAAA=")
+tile_map_data = PackedByteArray("AAABAAAAAgABAAEAAAABABAAAgABAAEAAAACAAAAAgABAAEAAAACABAAAgABAAEAAAADAAAAAgABAAEAAAADABAAAgABAAEAAAAEAAAAAgABAAEAAAAEABAAAgABAAEAAAAFAAAAAgABAAEAAAAFABAAAgABAAEAAAAGAAAAAgABAAEAAAAGABAAAgABAAEAAAAHAAAAAgABAAEAAAAHABAAAgABAAEAAAAIAAAAAgABAAEAAAAIABAAAgABAAEAAAAJAAAAAgABAAEAAAAJABAAAgABAAEAAAAKAAAAAgABAAEAAAAKABAAAgABAAEAAAALAAAAAgABAAEAAAALABAAAgABAAEAAAAMAAAAAgABAAEAAAAMABAAAgABAAEAAAANAAAAAgABAAEAAAANABAAAgABAAEAAAAOAAAAAgABAAEAAAAOABAAAgABAAEAAAAPAAAAAgABAAEAAAAPABAAAgABAAEAAAAQAAAAAgABAAEAAAAQABAAAgABAAEAAAAAAAAAAgABAAEAAAAAAAEAAgABAAEAAAAAAAIAAgABAAEAAAAAAAMAAgABAAEAAAAAAAQAAgABAAEAAAAAAAUAAgABAAEAAAAAAAYAAgABAAEAAAAAAAcAAgABAAEAAAAAAAgAAgABAAEAAAAAAAkAAgABAAEAAAAAAAoAAgABAAEAAAAAAAsAAgABAAEAAAAAAAwAAgABAAEAAAAAAA0AAgABAAEAAAAAAA4AAgABAAEAAAAAAA8AAgABAAEAAAAAABAAAgABAAEAAAAQAAEAAgABAAEAAAAQAAIAAgABAAEAAAAQAAMAAgABAAEAAAAQAAQAAgABAAEAAAAQAAUAAgABAAEAAAAQAAYAAgABAAEAAAAQAAcAAgABAAEAAAAQAAgAAgABAAEAAAAQAAkAAgABAAEAAAAQAAoAAgABAAEAAAAQAAsAAgABAAEAAAAQAAwAAgABAAEAAAAQAA0AAgABAAEAAAAQAA4AAgABAAEAAAAQAA8AAgABAAEAAAADAA4AAgAAAAAAAAABAA0AAgAAAAAAAAABAA4AAgAAAAEAAAABAA8AAgAAAAEAAAADAA8AAgAAAAEAAAADAA0AAgAAAAEAAAAFAA4AAgAAAAEAAAAOAA0AAgAAAAEAAAAPAA0AAgAAAAEAAAAPAAwAAgAAAAEAAAAPAAsAAgAAAAAAAAANAAoAAgAAAAAAAAAPAAkAAgAAAAAAAAAPAAoAAgAAAAEAAAANAAkAAgAAAAEAAAAKAAkAAgAAAAEAAAAPAAUAAgAAAAEAAAAOAAUAAgAAAAEAAAANAAUAAgAAAAEAAAALAAUAAgAAAAEAAAAKAAUAAgAAAAEAAAAJAAUAAgAAAAEAAAAHAAUAAgAAAAEAAAAGAAUAAgAAAAEAAAAFAAUAAgAAAAEAAAABAAkAAgAAAAEAAAACAAkAAgAAAAEAAAADAAkAAgAAAAEAAAAFAAkAAgAAAAEAAAAGAAkAAgAAAAEAAAAIAAkAAgAAAAEAAAABAAUAAgAAAAAAAAADAAUAAgAAAAEAAAAHAA0AAgAAAAEAAAALAA0AAgAAAAEAAAABAAcAAgAAAAAAAAADAAYAAgAAAAAAAAABAAYAAgAAAAEAAAABAAgAAgAAAAEAAAA=")
 tile_set = ExtResource("1_6ovph")
+
+[node name="Pits" type="TileMapLayer" parent="."]
+visible = false
+texture_filter = 1
+scale = Vector2(1.985, 1.985)
+tile_map_data = PackedByteArray("AAAIAA0AAgAAAAEAAAAKAA0AAgAAAAEAAAAEAAkAAgAAAAEAAAA=")
+tile_set = ExtResource("1_6ovph")
+
+[node name="Platforms" type="TileMapLayer" parent="."]
+texture_filter = 1
+scale = Vector2(1.985, 1.985)
+tile_map_data = PackedByteArray("AAAJAA0AAgAAAAEAAAAEAAUAAgAAAAEAAAA=")
+tile_set = ExtResource("1_6ovph")
+
+[node name="MorePlatforms" type="TileMapLayer" parent="."]
+texture_filter = 1
+scale = Vector2(1.985, 1.985)
+tile_map_data = PackedByteArray("AAAMAA0AAgAAAAEAAAALAAkAAgAAAAEAAAAMAAkAAgAAAAEAAAA=")
+tile_set = ExtResource("1_6ovph")
+
+[node name="SpikesLayers" type="TileMapLayer" parent="."]
+texture_filter = 1
+rotation = 3.1415927
+scale = Vector2(1.985, 1.985)
+tile_map_data = PackedByteArray("AAD3//D/AwAHAAgAAAD1//D/AwAHAAgAAADz//D/AwAHAAgAAADy//D/AwAHAAgAAAD5//v/AwAHAAgAAAD5//X/AwAFAAcAAAD3//X/AwAFAAcAAAD1//X/AwAFAAcAAAA=")
+tile_set = ExtResource("1_6ovph")
+
+[node name="MovingSpikes" type="TileMapLayer" parent="."]
+texture_filter = 1
+rotation = 3.1415927
+scale = Vector2(1.985, 1.985)
+tile_map_data = PackedByteArray("AAD1//v/AwAHAAgAAAD3//f/AwAHAAgAAAA=")
+tile_set = ExtResource("1_6ovph")
+
+[node name="Hardest" type="Node2D" parent="."]
+texture_filter = 1
+
+[node name="MorePikes" type="Node2D" parent="Hardest"]
+script = ExtResource("4_dw26h")
+
+[node name="MoreMovingSpikes" type="TileMapLayer" parent="Hardest"]
+texture_filter = 1
+rotation = 3.1415927
+scale = Vector2(1.985, 1.985)
+tile_map_data = PackedByteArray("AAD2//D/AwAHAAgAAAD0//D/AwAHAAgAAADy//v/AwAHAAgAAADw//v/AwAHAAgAAAD9//f/AwAHAAgAAAD6//f/AwAHAAgAAAD7//v/AwAHAAgAAADx//P/AwAHAAgAAAA=")
+tile_set = ExtResource("1_6ovph")
+
+[node name="Pikes" type="Node2D" parent="."]
+script = ExtResource("4_dw26h")
+
+[node name="Sawblade" parent="." instance=ExtResource("5_lrl65")]
+position = Vector2(542.00006, 183)
+scale = Vector2(4.3599997, 4.3599997)
+
+[node name="StickWall" type="Node2D" parent="."]
+
+[node name="WallJumpPoint" parent="StickWall" instance=ExtResource("6_76388")]
+position = Vector2(247, 922)
+scale = Vector2(1, 2.3199997)
+
+[node name="WallJumpPoint2" parent="StickWall" instance=ExtResource("6_76388")]
+position = Vector2(198, 922)
+scale = Vector2(1, 2.3199997)
+
+[node name="WallJumpPoint3" parent="StickWall" instance=ExtResource("6_76388")]
+position = Vector2(119, 857)
+scale = Vector2(1, 2.3199997)
+
+[node name="WallJumpPoint4" parent="StickWall" instance=ExtResource("6_76388")]
+position = Vector2(960, 731)
+scale = Vector2(1, 2.3199997)
+
+[node name="WallJumpPoint5" parent="StickWall" instance=ExtResource("6_76388")]
+position = Vector2(882, 667)
+scale = Vector2(1, 2.3199997)
+
+[node name="WallJumpPoint6" parent="StickWall" instance=ExtResource("6_76388")]
+position = Vector2(960, 603)
+scale = Vector2(1, 2.3199997)
+
+[node name="WallJumpPoint7" parent="StickWall" instance=ExtResource("6_76388")]
+position = Vector2(119, 477)
+scale = Vector2(1, 2.3199997)
+
+[node name="WallJumpPoint8" parent="StickWall" instance=ExtResource("6_76388")]
+position = Vector2(198, 414)
+scale = Vector2(1, 2.3199997)
+
+[node name="WallJumpPoint9" parent="StickWall" instance=ExtResource("6_76388")]
+position = Vector2(121, 348)
+scale = Vector2(1, 2.3199997)

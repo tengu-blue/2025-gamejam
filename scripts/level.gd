@@ -14,5 +14,5 @@ func show_layer(layer) -> void:
 
 # TODO: unload this level and load blank again
 func end_all() -> void:
+	get_tree().change_scene_to_file("res://scenes/Blank.tscn")
 	
-	pass

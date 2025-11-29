@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dit2l41vwb1o0"]
+
+[ext_resource type="Texture2D" uid="uid://bdfns6huf7ahj" path="res://assets/craftpix-net-926878-free-platformer-game-tileset-pixel-art/TILED_files/Objects.png" id="1_vstlh"]
+
+[node name="Pike" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_vstlh")
+region_enabled = true
+region_rect = Rect2(179, 225, 12, 47)
