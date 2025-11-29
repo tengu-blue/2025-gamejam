@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://da36jwyg52jy4"]
+[gd_scene load_steps=20 format=4 uid="uid://da36jwyg52jy4"]
 
 [ext_resource type="TileSet" uid="uid://bmrv70o5g5e3o" path="res://assets/level_tiles.tres" id="1_6ovph"]
 [ext_resource type="Script" uid="uid://bsjkciqkxfgrl" path="res://scripts/level.gd" id="1_bwv4p"]
@@ -14,6 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://bdp4blnqtqpda" path="res://scenes/WallJumpPoint.tscn" id="6_76388"]
 [ext_resource type="PackedScene" uid="uid://6eecpefh5tin" path="res://scenes/Goal.tscn" id="8_ecr63"]
 [ext_resource type="PackedScene" uid="uid://dit2l41vwb1o0" path="res://scenes/Pike.tscn" id="10_2meft"]
+[ext_resource type="AudioStream" uid="uid://blxyj6vf7mwqf" path="res://assets/audio/spikes_click.mp3" id="10_i2gr7"]
+[ext_resource type="AudioStream" uid="uid://lpkg4jluygk0" path="res://assets/audio/pikes_swish.wav" id="12_r7dij"]
+[ext_resource type="Script" uid="uid://40lo2yltmtbd" path="res://scripts/swish.gd" id="13_2ouud"]
 [ext_resource type="Script" uid="uid://bsn6csxntdaq8" path="res://scripts/jitter.gd" id="14_av1gt"]
 [ext_resource type="Script" uid="uid://jthqqgp3d25u" path="res://scripts/camera.gd" id="15_ipmer"]
 
@@ -160,6 +163,10 @@ scale = Vector2(6.9043164, 6.9043164)
 [node name="Timer" type="Timer" parent="MovingSpikes"]
 autostart = true
 
+[node name="Swish" type="AudioStreamPlayer2D" parent="MovingSpikes"]
+stream = ExtResource("10_i2gr7")
+volume_db = -5.0
+
 [node name="Hardest" type="Node2D" parent="."]
 texture_filter = 1
 
@@ -186,6 +193,15 @@ distance = Vector2(0, -250)
 position = Vector2(667.5, 506)
 scale = Vector2(1.4166666, 4.9453173)
 distance = Vector2(0, -250)
+
+[node name="Swish" type="AudioStreamPlayer2D" parent="Hardest/MorePikes"]
+stream = ExtResource("12_r7dij")
+volume_db = -5.0
+script = ExtResource("13_2ouud")
+
+[node name="Timer" type="Timer" parent="Hardest/MorePikes/Swish"]
+wait_time = 2.0
+autostart = true
 
 [node name="MoreMovingSpikes" type="TileMapLayer" parent="Hardest"]
 texture_filter = 1
@@ -240,6 +256,10 @@ scale = Vector2(6.9043174, 6.9043174)
 [node name="Timer" type="Timer" parent="Hardest/MoreMovingSpikes"]
 autostart = true
 
+[node name="Swish" type="AudioStreamPlayer2D" parent="Hardest/MoreMovingSpikes"]
+stream = ExtResource("10_i2gr7")
+volume_db = -5.0
+
 [node name="Pikes" type="Node2D" parent="."]
 script = ExtResource("4_dw26h")
 
@@ -259,6 +279,14 @@ distance = Vector2(-200, 0)
 position = Vector2(408, 956.785)
 scale = Vector2(1.6666641, 4.9453173)
 distance = Vector2(0, 200)
+
+[node name="Swish" type="AudioStreamPlayer2D" parent="Pikes"]
+stream = ExtResource("12_r7dij")
+script = ExtResource("13_2ouud")
+
+[node name="Timer" type="Timer" parent="Pikes/Swish"]
+wait_time = 2.0
+autostart = true
 
 [node name="Sawblade" parent="." instance=ExtResource("5_lrl65")]
 position = Vector2(537.00006, 183)
@@ -377,5 +405,7 @@ autostart = true
 [connection signal="timeout" from="Platforms/Timer" to="Platforms" method="_on_timer_timeout"]
 [connection signal="timeout" from="MorePlatforms/Timer" to="MorePlatforms" method="_on_timer_timeout"]
 [connection signal="timeout" from="MovingSpikes/Timer" to="MovingSpikes" method="_on_timer_timeout"]
+[connection signal="timeout" from="Hardest/MorePikes/Swish/Timer" to="Hardest/MorePikes/Swish" method="_on_timer_timeout"]
 [connection signal="timeout" from="Hardest/MoreMovingSpikes/Timer" to="Hardest/MoreMovingSpikes" method="_on_timer_timeout"]
+[connection signal="timeout" from="Pikes/Swish/Timer" to="Pikes/Swish" method="_on_timer_timeout"]
 [connection signal="timeout" from="Camera2D/Timer" to="Camera2D" method="_on_timer_timeout"]

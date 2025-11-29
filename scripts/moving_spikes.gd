@@ -29,6 +29,8 @@ func toggle():
 	
 	await t.finished
 	
+	$Swish.play()
+	
 	t = create_tween()
 	t.tween_property($".", "position", initPos, 0.2)	
 

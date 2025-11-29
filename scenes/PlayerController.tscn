@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsiwqct5gakw8"]
+[gd_scene load_steps=6 format=3 uid="uid://bsiwqct5gakw8"]
 
 [ext_resource type="Script" uid="uid://bu0h83yxmt1xq" path="res://scripts/player_controller.gd" id="1_awcob"]
 [ext_resource type="Texture2D" uid="uid://dbpxeubs4lrga" path="res://assets/player.png" id="2_hkpaj"]
 [ext_resource type="AudioStream" uid="uid://do6bptrh1dj80" path="res://assets/audio/jump.wav" id="3_hkpaj"]
+[ext_resource type="AudioStream" uid="uid://kyuruytrdgia" path="res://assets/audio/hitHurt.wav" id="4_bb7sg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_awcob"]
 size = Vector2(10, 10)
@@ -20,8 +21,12 @@ texture = ExtResource("2_hkpaj")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Player"]]
 shape = SubResource("RectangleShape2D_awcob")
 
-[node name="SFXPlayer" type="AudioStreamPlayer2D" parent="."]
+[node name="SFXPlayerJump" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_hkpaj")
-volume_db = -31.631
-pitch_scale = 0.79
+volume_db = -2.0
+bus = &"SFX"
+
+[node name="SFXPlayerHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_bb7sg")
+volume_db = -2.0
 bus = &"SFX"

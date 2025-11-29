@@ -27,6 +27,7 @@ func _process(delta: float) -> void:
 func activate_feature():
 	position.x -= 1000
 	going = true
+	$Sound.play()	
 	
 func deactivate_feature():
 	position.x += 1000

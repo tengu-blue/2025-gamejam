@@ -104,7 +104,7 @@ func _process(delta: float) -> void:
 	
 	if GameManager.can_move() and Input.is_action_just_pressed("Jump") and (is_on_floor() or on_wall or Time.get_ticks_msec() - last_ground < coyote_time*1000) and !jumping:
 		jumping = true
-		$SFXPlayer.play()
+		$SFXPlayerJump.play()
 		last_ground -= 1000
 	
 	if jumping:
@@ -156,4 +156,5 @@ func _physics_process(_delta) -> void:
 # -------------------------------------------------------
 
 func hit():
+	$SFXPlayerHit.play()
 	death_anim()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://6eecpefh5tin"]
+[gd_scene load_steps=5 format=3 uid="uid://6eecpefh5tin"]
 
 [ext_resource type="Texture2D" uid="uid://uslli7hq8sfr" path="res://assets/craftpix-net-926878-free-platformer-game-tileset-pixel-art/PNG/Objects.png" id="1_grq7m"]
 [ext_resource type="Script" uid="uid://bwoudwmut38qj" path="res://scripts/goal.gd" id="2_sos67"]
+[ext_resource type="AudioStream" uid="uid://bh1jagvmvie4w" path="res://assets/audio/pickupCoin.wav" id="3_3id6j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_grq7m"]
 
@@ -19,6 +20,10 @@ shape = SubResource("RectangleShape2D_grq7m")
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
+
+[node name="PickSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_3id6j")
+volume_db = -10.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
