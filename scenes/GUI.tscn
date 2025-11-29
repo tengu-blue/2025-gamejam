@@ -1,0 +1,109 @@
+[gd_scene load_steps=6 format=3 uid="uid://djigge1u7r1oa"]
+
+[ext_resource type="Script" uid="uid://yqo8jd0q8dkn" path="res://scripts/game_manager_script.gd" id="1_jbthi"]
+[ext_resource type="Texture2D" uid="uid://dbpxeubs4lrga" path="res://assets/player.png" id="2_5j4t3"]
+[ext_resource type="Script" uid="uid://cdlyddx418um7" path="res://scripts/dialog_controls.gd" id="2_womn8"]
+[ext_resource type="Script" uid="uid://5l4antw0wqhe" path="res://scripts/beat_level.gd" id="4_shsct"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_womn8"]
+size = Vector2(1041, 414)
+
+[node name="Gui" type="CanvasLayer"]
+layer = 100
+script = ExtResource("1_jbthi")
+
+[node name="DialogBody" type="ColorRect" parent="."]
+offset_left = 27.0
+offset_top = 323.0
+offset_right = 1043.0
+offset_bottom = 711.0
+mouse_filter = 1
+color = Color(0.017732391, 0.017732391, 0.01773239, 1)
+
+[node name="DialogWindow" type="Label" parent="DialogBody"]
+layout_mode = 0
+offset_right = 1011.0
+offset_bottom = 385.0
+text = "This is test text"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PressToSkip" type="Label" parent="DialogBody"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 284.0
+offset_right = 1022.0
+offset_bottom = 393.0
+text = "Press to continue"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_womn8")
+
+[node name="Char1" type="Sprite2D" parent="DialogBody"]
+position = Vector2(108, 97)
+texture = ExtResource("2_5j4t3")
+
+[node name="Char2" type="Sprite2D" parent="DialogBody"]
+position = Vector2(834, 173)
+scale = Vector2(6.3, 1)
+texture = ExtResource("2_5j4t3")
+
+[node name="Area2D" type="Area2D" parent="DialogBody"]
+priority = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogBody/Area2D"]
+position = Vector2(510.5, 197)
+shape = SubResource("RectangleShape2D_womn8")
+
+[node name="Spikes" type="Button" parent="."]
+offset_left = 163.0
+offset_top = 783.0
+offset_right = 387.0
+offset_bottom = 922.0
+text = "Option1"
+
+[node name="Pits" type="Button" parent="."]
+offset_left = 416.0
+offset_top = 783.0
+offset_right = 640.0
+offset_bottom = 922.0
+text = "Option2"
+
+[node name="Option4" type="Button" parent="."]
+offset_left = 286.0
+offset_top = 784.0
+offset_right = 510.0
+offset_bottom = 923.0
+text = "Option4"
+
+[node name="Option5" type="Button" parent="."]
+offset_left = 544.0
+offset_top = 783.0
+offset_right = 768.0
+offset_bottom = 922.0
+text = "Option5"
+
+[node name="Option3" type="Button" parent="."]
+offset_left = 669.0
+offset_top = 783.0
+offset_right = 893.0
+offset_bottom = 922.0
+text = "Option3"
+
+[node name="BeatLevel" type="Button" parent="."]
+offset_left = 205.0
+offset_top = 1000.0
+offset_right = 384.0
+offset_bottom = 1065.0
+text = "Beat"
+script = ExtResource("4_shsct")
+
+[node name="GiveUp" type="Button" parent="."]
+offset_left = 42.0
+offset_top = 1007.0
+offset_right = 179.0
+offset_bottom = 1064.0
+text = "Give up"
+
+[connection signal="input_event" from="DialogBody/Area2D" to="DialogBody/PressToSkip" method="_on_area_2d_input_event"]
+[connection signal="pressed" from="BeatLevel" to="BeatLevel" method="_on_pressed"]

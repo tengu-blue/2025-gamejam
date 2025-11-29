@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://clcc8o5lbpkku"]
+
+[ext_resource type="Script" uid="uid://bec5jlli2aega" path="res://scripts/main_button_pressed.gd" id="1_yqorp"]
+
+[node name="MainMenu" type="CanvasLayer"]
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -338.0
+offset_top = 250.0
+offset_right = 342.0
+offset_bottom = 416.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Play"
+script = ExtResource("1_yqorp")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 232.0
+offset_top = 330.0
+offset_right = 933.0
+offset_bottom = 625.0
+text = "WSAD / DPAD / JoyStick to move
+Space / Bottom controller button to jump
+Blue walls for wall jumps"
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
