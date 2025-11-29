@@ -1,9 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://djigge1u7r1oa"]
+[gd_scene load_steps=12 format=3 uid="uid://djigge1u7r1oa"]
 
 [ext_resource type="Script" uid="uid://yqo8jd0q8dkn" path="res://scripts/game_manager_script.gd" id="1_jbthi"]
-[ext_resource type="Texture2D" uid="uid://dbpxeubs4lrga" path="res://assets/player.png" id="2_5j4t3"]
 [ext_resource type="Script" uid="uid://cdlyddx418um7" path="res://scripts/dialog_controls.gd" id="2_womn8"]
+[ext_resource type="Texture2D" uid="uid://y5i87ftnmmu2" path="res://assets/silh1.png" id="3_tqy5q"]
+[ext_resource type="Texture2D" uid="uid://citforytqxfw5" path="res://assets/silh2.png" id="4_hywd1"]
 [ext_resource type="Script" uid="uid://5l4antw0wqhe" path="res://scripts/beat_level.gd" id="4_shsct"]
+[ext_resource type="FontVariation" uid="uid://daqtgud8msa3a" path="res://scenes/button_text.tres" id="5_cws7i"]
+[ext_resource type="StyleBox" uid="uid://1ty8cgv34s5q" path="res://scenes/button_style.tres" id="5_hywd1"]
+[ext_resource type="StyleBox" uid="uid://cjnxfj2kx2yer" path="res://scenes/butotn_press.tres" id="7_cekc3"]
+[ext_resource type="StyleBox" uid="uid://dntvvp0gly24y" path="res://scenes/button_hover.tres" id="8_1i4pd"]
+
+[sub_resource type="SystemFont" id="SystemFont_tqy5q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_womn8"]
 size = Vector2(1041, 414)
@@ -22,31 +29,53 @@ color = Color(0.017732391, 0.017732391, 0.01773239, 1)
 
 [node name="DialogWindow" type="Label" parent="DialogBody"]
 layout_mode = 0
-offset_right = 1011.0
-offset_bottom = 385.0
-text = "This is test text"
+offset_left = 253.0
+offset_top = 58.0
+offset_right = 748.0
+offset_bottom = 384.0
+theme_override_fonts/font = SubResource("SystemFont_tqy5q")
+theme_override_font_sizes/font_size = 20
+text = "This is test text asdadsasd asd sad asd as dddddddddd ads ad asd ad asd asd asd a sda sd"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="PressToSkip" type="Label" parent="DialogBody"]
+modulate = Color(0.50928617, 0.50928617, 0.50928617, 1)
 layout_mode = 0
-offset_left = 11.0
-offset_top = 284.0
-offset_right = 1022.0
+offset_top = 328.0
+offset_right = 1016.0
 offset_bottom = 393.0
 text = "Press to continue"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("2_womn8")
 
-[node name="Char1" type="Sprite2D" parent="DialogBody"]
-position = Vector2(108, 97)
-texture = ExtResource("2_5j4t3")
-
 [node name="Char2" type="Sprite2D" parent="DialogBody"]
-position = Vector2(834, 173)
-scale = Vector2(6.3, 1)
-texture = ExtResource("2_5j4t3")
+position = Vector2(146, 190)
+scale = Vector2(0.68, 0.68)
+texture = ExtResource("3_tqy5q")
+
+[node name="Label" type="Label" parent="DialogBody/Char2"]
+offset_left = 86.764694
+offset_top = 145.5882
+offset_right = 138.7647
+offset_bottom = 173.5882
+theme_override_font_sizes/font_size = 22
+text = "Oizys"
+
+[node name="Char1" type="Sprite2D" parent="DialogBody"]
+position = Vector2(851.99976, 190)
+scale = Vector2(0.68, 0.68)
+texture = ExtResource("4_hywd1")
+
+[node name="Label" type="Label" parent="DialogBody/Char1"]
+offset_left = -138.23529
+offset_top = 145.58821
+offset_right = -86.23529
+offset_bottom = 173.58821
+theme_override_font_sizes/font_size = 22
+text = "Felicia"
 
 [node name="Area2D" type="Area2D" parent="DialogBody"]
 priority = 5
@@ -57,48 +86,72 @@ shape = SubResource("RectangleShape2D_womn8")
 
 [node name="Spikes" type="Button" parent="."]
 offset_left = 163.0
-offset_top = 783.0
-offset_right = 387.0
-offset_bottom = 922.0
+offset_top = 790.0
+offset_right = 383.0
+offset_bottom = 920.0
 focus_neighbor_left = NodePath("../Platforms")
 focus_neighbor_right = NodePath("../Pits")
-text = "Option1"
+theme_override_fonts/font = ExtResource("5_cws7i")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = ExtResource("5_hywd1")
+theme_override_styles/pressed = ExtResource("7_cekc3")
+theme_override_styles/hover = ExtResource("8_1i4pd")
+text = "Spikes"
 
 [node name="Pits" type="Button" parent="."]
 offset_left = 435.0
-offset_top = 774.0
-offset_right = 659.0
-offset_bottom = 913.0
+offset_top = 790.0
+offset_right = 655.0
+offset_bottom = 920.0
 focus_neighbor_left = NodePath("../Spikes")
 focus_neighbor_right = NodePath("../Platforms")
-text = "Option2"
+theme_override_fonts/font = ExtResource("5_cws7i")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = ExtResource("5_hywd1")
+theme_override_styles/pressed = ExtResource("7_cekc3")
+theme_override_styles/hover = ExtResource("8_1i4pd")
+text = "Pits"
 
 [node name="Pikes" type="Button" parent="."]
 offset_left = 575.0
-offset_top = 781.0
-offset_right = 799.0
+offset_top = 790.0
+offset_right = 795.0
 offset_bottom = 920.0
 focus_neighbor_left = NodePath("../Sawblade")
 focus_neighbor_right = NodePath("../Sawblade")
-text = "Option3"
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = ExtResource("5_hywd1")
+theme_override_styles/pressed = ExtResource("7_cekc3")
+theme_override_styles/hover = ExtResource("8_1i4pd")
+text = "Pikes"
 
 [node name="Sawblade" type="Button" parent="."]
 offset_left = 304.0
-offset_top = 777.0
-offset_right = 528.0
-offset_bottom = 916.0
+offset_top = 790.0
+offset_right = 524.0
+offset_bottom = 920.0
 focus_neighbor_left = NodePath("../Pikes")
 focus_neighbor_right = NodePath("../Pikes")
-text = "Option5"
+theme_override_fonts/font = ExtResource("5_cws7i")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = ExtResource("5_hywd1")
+theme_override_styles/pressed = ExtResource("7_cekc3")
+theme_override_styles/hover = ExtResource("8_1i4pd")
+text = "Sawblade"
 
 [node name="Platforms" type="Button" parent="."]
 offset_left = 710.0
-offset_top = 780.0
-offset_right = 934.0
-offset_bottom = 919.0
+offset_top = 790.0
+offset_right = 930.0
+offset_bottom = 920.0
 focus_neighbor_left = NodePath("../Pits")
 focus_neighbor_right = NodePath("../Spikes")
-text = "Option4"
+theme_override_fonts/font = ExtResource("5_cws7i")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = ExtResource("5_hywd1")
+theme_override_styles/pressed = ExtResource("7_cekc3")
+theme_override_styles/hover = ExtResource("8_1i4pd")
+text = "Platforms"
 
 [node name="BeatLevel" type="Button" parent="."]
 offset_left = 205.0
@@ -110,12 +163,16 @@ text = "Beat"
 script = ExtResource("4_shsct")
 
 [node name="GiveUp" type="Button" parent="."]
-offset_left = 917.0
-offset_top = 1002.0
-offset_right = 1054.0
-offset_bottom = 1059.0
-text = "Give up"
+offset_left = 935.0
+offset_top = 934.0
+offset_right = 1055.0
+offset_bottom = 1054.0
+theme_override_styles/normal = ExtResource("5_hywd1")
+theme_override_styles/pressed = ExtResource("7_cekc3")
+theme_override_styles/hover = ExtResource("8_1i4pd")
+text = "Give Up"
 
+[connection signal="visibility_changed" from="DialogBody/PressToSkip" to="DialogBody/PressToSkip" method="_on_visibility_changed"]
 [connection signal="input_event" from="DialogBody/Area2D" to="DialogBody/PressToSkip" method="_on_area_2d_input_event"]
 [connection signal="pressed" from="Spikes" to="." method="option_spikes"]
 [connection signal="pressed" from="Pits" to="." method="option_pits"]

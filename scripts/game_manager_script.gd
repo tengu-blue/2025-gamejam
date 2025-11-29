@@ -157,12 +157,18 @@ var dialogs := [
 ]
 
 func hide_dialog() -> void:
+	
 	$DialogBody.visible = false
+	$DialogBody/DialogWindow.modulate.a = 0
+	$DialogBody/Char1.modulate.a = 0
+	$DialogBody/Char2.modulate.a = 0
+	
 
 func show_dialog() -> void:
 	# take the current indices and based on the index, show / hide images and show the text
 	# TODO: check bounds etc.
 	$DialogBody.visible = true
+	create_tween().tween_property($DialogBody, "color:a", 1, 0.1)
 	
 	if dialogIndex >= len(dialogs):
 		dialogIndex = 0
@@ -172,9 +178,29 @@ func show_dialog() -> void:
 	
 	var data = dialogs[dialogIndex][lineIndex]
 	
-	# TODO: show / hide the thingies
-	print("Showing ", dialogIndex, ' ', lineIndex)
+	
+	
+	
+	# animations etc.
+	if data[0] == 1:
+		$DialogBody/Char1.visible = true
+		create_tween().tween_property($DialogBody/Char1, "modulate:a", 1, 0.1)
+		create_tween().tween_property($DialogBody/Char2, "modulate:a", 0, 0.1)
+	elif data[0] == 2:
+		$DialogBody/Char2.visible = true
+		create_tween().tween_property($DialogBody/Char2, "modulate:a", 1, 0.1)
+		create_tween().tween_property($DialogBody/Char1, "modulate:a", 0, 0.1)
+	else:
+		$DialogBody/Char1.visible = false
+		$DialogBody/Char2.visible = false
+		create_tween().tween_property($DialogBody/Char1, "modulate:a", 0, 0.1)
+		create_tween().tween_property($DialogBody/Char2, "modulate:a", 0, 0.1)
+	
+	
+	var t = create_tween().tween_property($DialogBody/DialogWindow, "modulate:a", 0, 0.1)
+	await t.finished
 	$DialogBody/DialogWindow.text = data[1]
+	create_tween().tween_property($DialogBody/DialogWindow, "modulate:a", 1, 0.2)
 	
 # -------------------------------------------------------------------------
 
@@ -311,42 +337,50 @@ func hide_options() -> void:
 
 func option_spikes() -> void:
 	used_options.append("spikes")
-	$"/root/Level1".show_layer("spikes")	
+	SceneTransitioner.transition(func():
+		$"/root/Level1".show_layer("spikes")	
+	)
 	hide_options()
 	hide_dialog()
 
 func option_pits() -> void:
 	used_options.append("pits")
-	$"/root/Level1".show_layer("pits")
+	SceneTransitioner.transition(func():
+		$"/root/Level1".show_layer("pits")
+	)
 	hide_options()	
 	hide_dialog()
 
 func option_platforms() -> void:
-	used_options.append("platforms")
-	$"/root/Level1".show_layer("platforms")
 	hide_options()
 	hide_dialog()
+	used_options.append("platforms")
+	SceneTransitioner.transition(func():
+		$"/root/Level1".show_layer("platforms")
+	)
 
 
 func option_sawblades() -> void:
-	used_options.append("sawblade")
-	$"/root/Level1".show_layer("sawblade")
 	hide_options()
 	hide_dialog()
+	used_options.append("sawblade")
+	SceneTransitioner.transition(func():
+		$"/root/Level1".show_layer("sawblade")
+	)
 
 func option_pikes() -> void:
-	used_options.append("pikes")
-	$"/root/Level1".show_layer("pikes")
 	hide_options()
 	hide_dialog()
+	used_options.append("pikes")
+	SceneTransitioner.transition(func():
+		$"/root/Level1".show_layer("pikes")
+	)
 
 # -------------------------------------------------------------------------
 
 
 func applyState() -> void:
-	
-	print("Applying ", currentState)
-	
+		
 	match currentState:
 		GameState.Menu:
 			hide_dialog()
@@ -359,9 +393,13 @@ func applyState() -> void:
 			show_dialog()
 		
 		GameState.FirstLevelExplain:
+			
+			hide_dialog()
 			# Load the level and play the next dialog
-			get_tree().change_scene_to_file("res://scenes/Level1.tscn")
-			show_dialog()
+			SceneTransitioner.transition(func():
+				get_tree().change_scene_to_file("res://scenes/Level1.tscn")
+				show_dialog()
+			)
 		
 		GameState.FirstLevelPlay:
 			hide_dialog()
@@ -395,9 +433,12 @@ func applyState() -> void:
 		
 		GameState.Four:
 			hide_dialog()
-			$"/root/Level1".show_layer("hardest")	
-			$GiveUp.visible = true
-			$GiveUp.grab_focus()
+			
+			SceneTransitioner.transition(func():
+				$"/root/Level1".show_layer("hardest")	
+				$GiveUp.visible = true
+				$GiveUp.grab_focus()
+			)
 		
 		GameState.Won:
 			show_dialog()
@@ -410,6 +451,7 @@ func applyState() -> void:
 		GameState.PostEnd:
 			hide_dialog()
 			# load thank you screen (with ending message) / menu
-			get_tree().change_scene_to_file("res://scenes/EndScene.tscn")
-		
+			SceneTransitioner.transition(func():
+				get_tree().change_scene_to_file("res://scenes/EndScene.tscn")
+			)
 	pass

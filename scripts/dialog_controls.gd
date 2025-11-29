@@ -12,3 +12,8 @@ func _process(delta: float) -> void:
 	if $"..".visible and Input.is_action_just_pressed("Next"):
 		GameManager.dialog_next()
 		
+
+
+func _on_visibility_changed() -> void:
+	modulate.a = 0
+	create_tween().tween_property(self, "modulate:a", 1, 0.5)
