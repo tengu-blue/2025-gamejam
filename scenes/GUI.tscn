@@ -63,32 +63,32 @@ offset_bottom = 922.0
 text = "Option1"
 
 [node name="Pits" type="Button" parent="."]
-offset_left = 416.0
-offset_top = 783.0
-offset_right = 640.0
-offset_bottom = 922.0
+offset_left = 435.0
+offset_top = 774.0
+offset_right = 659.0
+offset_bottom = 913.0
 text = "Option2"
 
-[node name="Option4" type="Button" parent="."]
-offset_left = 286.0
-offset_top = 784.0
-offset_right = 510.0
-offset_bottom = 923.0
-text = "Option4"
+[node name="Pikes" type="Button" parent="."]
+offset_left = 575.0
+offset_top = 781.0
+offset_right = 799.0
+offset_bottom = 920.0
+text = "Option3"
 
-[node name="Option5" type="Button" parent="."]
-offset_left = 544.0
-offset_top = 783.0
-offset_right = 768.0
-offset_bottom = 922.0
+[node name="Sawblade" type="Button" parent="."]
+offset_left = 304.0
+offset_top = 777.0
+offset_right = 528.0
+offset_bottom = 916.0
 text = "Option5"
 
-[node name="Option3" type="Button" parent="."]
-offset_left = 669.0
-offset_top = 783.0
-offset_right = 893.0
-offset_bottom = 922.0
-text = "Option3"
+[node name="Platforms" type="Button" parent="."]
+offset_left = 710.0
+offset_top = 780.0
+offset_right = 934.0
+offset_bottom = 919.0
+text = "Option4"
 
 [node name="BeatLevel" type="Button" parent="."]
 offset_left = 205.0
@@ -106,4 +106,10 @@ offset_bottom = 1064.0
 text = "Give up"
 
 [connection signal="input_event" from="DialogBody/Area2D" to="DialogBody/PressToSkip" method="_on_area_2d_input_event"]
+[connection signal="pressed" from="Spikes" to="." method="option_spikes"]
+[connection signal="pressed" from="Pits" to="." method="option_pits"]
+[connection signal="pressed" from="Pikes" to="." method="option_pikes"]
+[connection signal="pressed" from="Sawblade" to="." method="option_sawblades"]
+[connection signal="pressed" from="Platforms" to="." method="option_platforms"]
 [connection signal="pressed" from="BeatLevel" to="BeatLevel" method="_on_pressed"]
+[connection signal="pressed" from="GiveUp" to="." method="level_give_up"]
